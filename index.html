@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🔮 CYBER DECK · MASTER</title>
+    <title>🔮 CYBER DECK</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Courier New', monospace;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
         body {
             min-height: 100vh;
             background: radial-gradient(circle at 20% 30%, #0a0f1e, #020408);
@@ -24,15 +19,13 @@
         .cyber-terminal {
             max-width: 500px;
             width: 100%;
-            background: rgba(8, 16, 30, 0.75);
+            background: rgba(8, 16, 30, 0.8);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(0, 255, 255, 0.25);
             border-radius: 40px;
             padding: 24px 20px 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 180, 255, 0.2);
-            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
             z-index: 10;
         }
         .screen {
@@ -42,53 +35,27 @@
             gap: 24px;
             min-height: 420px;
             justify-content: center;
-            transition: opacity 0.6s ease;
         }
-        #loginScreen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 24px;
-            width: 100%;
-        }
+        #loginScreen { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; }
         .finger-icon {
             font-size: 82px;
             color: #6bcbff;
             text-shadow: 0 0 25px #00a6ff, 0 0 60px #0044ff88;
-            transition: 0.2s;
             cursor: pointer;
-            user-select: none;
             padding: 16px;
             border-radius: 80px;
             background: rgba(0, 150, 255, 0.05);
             border: 1px solid rgba(100, 200, 255, 0.2);
         }
-        .finger-icon:active {
-            transform: scale(0.92);
-            color: #a3e0ff;
-            text-shadow: 0 0 45px #0088ff, 0 0 90px #0044ff;
-        }
+        .finger-icon:active { transform: scale(0.92); }
         .scan-hint {
             color: #88ccff;
             font-size: 14px;
             letter-spacing: 2px;
-            background: rgba(0, 255, 255, 0.04);
             padding: 12px 24px;
             border-radius: 60px;
             border: 1px dashed rgba(0, 200, 255, 0.3);
-            backdrop-filter: blur(4px);
-            font-weight: 300;
             text-transform: uppercase;
-        }
-        .scan-hint i {
-            margin-right: 10px;
-            color: #4fc3ff;
-        }
-        .fingerprint-glow {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         .blue-wave {
             position: absolute;
@@ -98,8 +65,6 @@
             background: radial-gradient(circle, rgba(0, 150, 255, 0.5) 0%, rgba(0, 100, 255, 0) 70%);
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.1s;
-            animation: none;
         }
         .blue-wave.active {
             opacity: 1;
@@ -119,7 +84,6 @@
             pointer-events: none;
             z-index: 999;
             opacity: 0;
-            transition: opacity 0.3s;
         }
         .blue-splash.active {
             opacity: 1;
@@ -135,12 +99,7 @@
             flex-direction: column;
             align-items: center;
             gap: 30px;
-            animation: fadeGlow 0.8s ease;
             width: 100%;
-        }
-        @keyframes fadeGlow {
-            0% { opacity: 0; text-shadow: 0 0 0 #00a6ff; }
-            100% { opacity: 1; text-shadow: 0 0 40px #0088ff, 0 0 80px #0044ff; }
         }
         .hello-master h1 {
             font-size: 38px;
@@ -151,8 +110,6 @@
             background: linear-gradient(135deg, #b3f0ff, #4dabff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 25px #0077ff55);
         }
         .continue-btn {
             background: transparent;
@@ -163,34 +120,18 @@
             font-size: 18px;
             font-weight: 500;
             letter-spacing: 3px;
-            backdrop-filter: blur(4px);
-            background: rgba(0, 150, 255, 0.08);
-            box-shadow: 0 0 20px #0077ff33;
             cursor: pointer;
-            transition: all 0.2s;
             text-transform: uppercase;
             display: flex;
             align-items: center;
             gap: 14px;
         }
-        .continue-btn i {
-            font-size: 20px;
-        }
-        .continue-btn:active {
-            transform: scale(0.94);
-            background: rgba(0, 200, 255, 0.2);
-            box-shadow: 0 0 45px #0088ff;
-        }
+        .continue-btn:active { transform: scale(0.94); }
         #menuScreen {
             display: none;
             flex-direction: column;
             gap: 20px;
             width: 100%;
-            animation: menuSlide 0.5s ease;
-        }
-        @keyframes menuSlide {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
         }
         .menu-grid {
             display: grid;
@@ -206,39 +147,12 @@
             padding: 22px 6px;
             text-align: center;
             color: #ccf0ff;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
-            transition: 0.15s ease;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            position: relative;
         }
-        .menu-card i {
-            font-size: 34px;
-            color: #3ebdff;
-            text-shadow: 0 0 20px #0088ff77;
-            margin-bottom: 4px;
-        }
-        .menu-card span {
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            color: #b3e4ff;
-        }
-        .menu-card small {
-            font-size: 11px;
-            color: #6d9bb0;
-            letter-spacing: 1px;
-            opacity: 0.7;
-        }
-        .menu-card:active {
-            transform: scale(0.94);
-            background: rgba(0, 150, 255, 0.15);
-            border-color: #3ebdff;
-            box-shadow: 0 0 30px #0088ff55;
-        }
+        .menu-card i { font-size: 34px; color: #3ebdff; text-shadow: 0 0 20px #0088ff77; }
+        .menu-card span { font-size: 18px; font-weight: 500; letter-spacing: 2px; display: block; margin-top: 4px; }
+        .menu-card small { font-size: 11px; color: #6d9bb0; display: block; margin-top: 2px; }
+        .menu-card:active { transform: scale(0.94); }
         .menu-card.attack { border-left: 4px solid #ff5e7c; }
         .menu-card.blocking { border-left: 4px solid #ffb347; }
         .menu-card.bugging { border-left: 4px solid #6fcf97; }
@@ -252,10 +166,6 @@
             padding-top: 20px;
             text-align: center;
             width: 100%;
-        }
-        .menu-footer i {
-            color: #3ebdff;
-            margin: 0 4px;
         }
         .glow-ring {
             position: absolute;
@@ -272,8 +182,9 @@
             50% { opacity: 0.8; }
             100% { transform: rotate(360deg) scale(1.1); opacity: 0.2; }
         }
+        .fingerprint-glow { position: relative; display: flex; justify-content: center; align-items: center; }
 
-        /* ===== BLOCKING (DEFENDER) ===== */
+        /* ===== BLOCKING ===== */
         #blockingOverlay {
             position: fixed;
             top: 0;
@@ -286,18 +197,9 @@
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            flex-direction: column;
-            gap: 20px;
             padding: 30px;
         }
-        #blockingOverlay.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
+        #blockingOverlay.active { display: flex; }
         .blocking-box {
             background: rgba(8, 20, 45, 0.95);
             border: 1.5px solid #ffb347;
@@ -308,20 +210,8 @@
             text-align: center;
             box-shadow: 0 0 60px #ffb34722;
         }
-        .blocking-box h2 {
-            color: #ffb347;
-            font-size: 24px;
-            letter-spacing: 3px;
-            margin-bottom: 5px;
-            text-shadow: 0 0 20px #ffb34755;
-        }
-        .blocking-box .sub {
-            color: #d48c3a;
-            font-size: 14px;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            opacity: 0.8;
-        }
+        .blocking-box h2 { color: #ffb347; font-size: 24px; letter-spacing: 3px; text-shadow: 0 0 20px #ffb34755; }
+        .blocking-box .sub { color: #d48c3a; font-size: 14px; margin-bottom: 20px; }
         .blocking-input {
             width: 100%;
             padding: 14px 18px;
@@ -330,21 +220,11 @@
             border-radius: 16px;
             color: #ffd7a0;
             font-size: 20px;
-            font-family: 'Courier New', monospace;
             text-align: center;
             letter-spacing: 3px;
             outline: none;
-            transition: 0.2s;
         }
-        .blocking-input:focus {
-            border-color: #ffb347;
-            box-shadow: 0 0 30px #ffb34733;
-        }
-        .blocking-input::placeholder {
-            color: #5a4a3a;
-            font-size: 14px;
-            letter-spacing: 1px;
-        }
+        .blocking-input:focus { border-color: #ffb347; box-shadow: 0 0 30px #ffb34733; }
         .blocking-btn {
             margin-top: 16px;
             background: transparent;
@@ -354,22 +234,15 @@
             border-radius: 40px;
             font-size: 16px;
             cursor: pointer;
-            transition: 0.2s;
             letter-spacing: 2px;
-            background: rgba(255, 179, 71, 0.05);
             width: 100%;
         }
-        .blocking-btn:active {
-            transform: scale(0.94);
-            background: rgba(255, 179, 71, 0.15);
-        }
+        .blocking-btn:active { transform: scale(0.94); }
         .blocking-status {
             margin-top: 16px;
             color: #d48c3a;
             font-size: 15px;
-            letter-spacing: 1px;
             min-height: 50px;
-            font-family: 'Courier New', monospace;
             line-height: 1.6;
         }
         .shield-break-container {
@@ -380,34 +253,22 @@
             height: 100%;
             pointer-events: none;
             z-index: 3000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         .shield-icon {
-            font-size: 80px;
+            font-size: 70px;
             color: #ffb347;
             text-shadow: 0 0 40px #ffb347, 0 0 80px #ffb34755;
-            animation: shieldBreak 0.6s ease forwards;
             position: absolute;
+            animation: shieldBreak 0.6s ease forwards;
         }
         @keyframes shieldBreak {
             0% { transform: scale(0.5) rotate(0deg); opacity: 1; }
-            50% { transform: scale(1.5) rotate(20deg); opacity: 1; }
             100% { transform: scale(2) rotate(45deg); opacity: 0; }
         }
-        .rush-final {
-            color: #ff0000;
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-shadow: 0 0 40px #ff0000, 0 0 80px #ff000066;
-            animation: finalPulse 0.3s ease infinite alternate;
-            font-family: 'Courier New', monospace;
-        }
+        .rush-final { color: #ff0000; font-size: 24px; font-weight: 700; text-shadow: 0 0 40px #ff0000; animation: finalPulse 0.3s ease infinite alternate; }
         @keyframes finalPulse {
-            0% { transform: scale(1); text-shadow: 0 0 40px #ff0000; }
-            100% { transform: scale(1.05); text-shadow: 0 0 80px #ff0000, 0 0 120px #ff000044; }
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
         }
         .blocking-close-btn {
             margin-top: 16px;
@@ -418,19 +279,12 @@
             border-radius: 40px;
             font-size: 16px;
             cursor: pointer;
-            transition: 0.2s;
             letter-spacing: 2px;
-            background: rgba(255, 179, 71, 0.05);
             display: none;
             width: 100%;
         }
-        .blocking-close-btn.active {
-            display: inline-block;
-        }
-        .blocking-close-btn:active {
-            transform: scale(0.94);
-            background: rgba(255, 179, 71, 0.15);
-        }
+        .blocking-close-btn.active { display: inline-block; }
+        .blocking-close-btn:active { transform: scale(0.94); }
 
         /* ===== EXTRACT ===== */
         .extract-overlay {
@@ -445,14 +299,9 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            flex-direction: column;
-            gap: 30px;
             padding: 30px;
         }
-        .extract-overlay.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
+        .extract-overlay.active { display: flex; }
         .extract-box {
             background: rgba(8, 20, 45, 0.9);
             border: 1px solid #bb86fc;
@@ -463,13 +312,7 @@
             text-align: center;
             box-shadow: 0 0 60px #bb86fc33;
         }
-        .extract-box h2 {
-            color: #bb86fc;
-            font-size: 22px;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px #bb86fc55;
-        }
+        .extract-box h2 { color: #bb86fc; font-size: 22px; letter-spacing: 3px; margin-bottom: 20px; }
         .progress-container {
             width: 100%;
             height: 14px;
@@ -492,32 +335,15 @@
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-        .progress-text {
-            color: #a78cd6;
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 20px #bb86fc44;
-        }
+        .progress-text { color: #a78cd6; font-size: 28px; font-weight: 700; letter-spacing: 2px; }
         .extract-success {
             display: none;
             color: #6fcf97;
             font-size: 24px;
             font-weight: 600;
-            letter-spacing: 2px;
             margin-top: 16px;
-            text-shadow: 0 0 30px #6fcf9755;
-            animation: successPulse 0.8s ease;
         }
-        .extract-success.active {
-            display: block;
-        }
-        @keyframes successPulse {
-            0% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        .extract-success.active { display: block; }
         .extract-close-btn {
             margin-top: 24px;
             background: transparent;
@@ -527,13 +353,7 @@
             border-radius: 40px;
             font-size: 16px;
             cursor: pointer;
-            transition: 0.2s;
             letter-spacing: 2px;
-            background: rgba(187, 134, 252, 0.05);
-        }
-        .extract-close-btn:active {
-            transform: scale(0.94);
-            background: rgba(187, 134, 252, 0.15);
         }
 
         /* ===== ATTACK ===== */
@@ -550,9 +370,7 @@
             align-items: center;
             flex-direction: column;
         }
-        #attackOverlay.active {
-            display: flex;
-        }
+        #attackOverlay.active { display: flex; }
         #attackCanvas {
             position: absolute;
             top: 0;
@@ -565,27 +383,16 @@
             position: relative;
             z-index: 10;
             color: #00ff41;
-            font-family: 'Courier New', monospace;
             font-size: 48px;
             font-weight: 700;
-            text-shadow: 0 0 40px #00ff41, 0 0 80px #00ff4188;
-            animation: attackSuccessPulse 0.5s ease;
-            letter-spacing: 4px;
+            text-shadow: 0 0 40px #00ff41;
             background: rgba(0, 0, 0, 0.6);
             padding: 20px 50px;
             border-radius: 20px;
             border: 2px solid #00ff4166;
             display: none;
         }
-        .attack-success.active {
-            display: block;
-            animation: attackSuccessPulse 0.5s ease;
-        }
-        @keyframes attackSuccessPulse {
-            0% { transform: scale(0.5); opacity: 0; }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        .attack-success.active { display: block; }
         .attack-close-btn {
             position: relative;
             z-index: 10;
@@ -597,34 +404,23 @@
             border-radius: 40px;
             font-size: 16px;
             cursor: pointer;
-            transition: 0.2s;
             letter-spacing: 2px;
-            background: rgba(0, 255, 65, 0.05);
             display: none;
         }
-        .attack-close-btn.active {
-            display: block;
-        }
-        .attack-close-btn:active {
-            transform: scale(0.94);
-            background: rgba(0, 255, 65, 0.15);
-        }
+        .attack-close-btn.active { display: block; }
+
         @media (max-width: 430px) {
-            .cyber-terminal { padding: 20px 12px; }
-            .hello-master h1 { font-size: 28px; letter-spacing: 4px; }
-            .menu-card i { font-size: 28px; }
-            .menu-card span { font-size: 16px; }
-            .extract-box { padding: 30px 18px; }
+            .hello-master h1 { font-size: 28px; }
             .attack-success { font-size: 28px; padding: 16px 24px; }
-            .blocking-box { padding: 25px 16px; }
-            .shield-icon { font-size: 60px; }
         }
     </style>
 </head>
 <body>
+    <!-- SPLASH -->
     <div id="blueSplash" class="blue-splash"></div>
 
     <div class="cyber-terminal">
+        <!-- LOGIN -->
         <div id="loginScreen" class="screen">
             <div class="fingerprint-glow">
                 <div class="glow-ring"></div>
@@ -633,14 +429,13 @@
                     <i class="fas fa-fingerprint"></i>
                 </div>
             </div>
-            <div class="scan-hint">
-                <i class="fas fa-scan"></i> TEKAN SIDIK JARI
-            </div>
-            <div style="color: #397e9e; font-size: 12px; letter-spacing: 1px; background: #00162255; padding: 6px 20px; border-radius: 40px;">
+            <div class="scan-hint"><i class="fas fa-scan"></i> TEKAN SIDIK JARI</div>
+            <div style="color: #397e9e; font-size: 12px; padding: 6px 20px; border-radius: 40px; background: #00162255;">
                 <i class="fas fa-shield-alt" style="margin-right: 8px;"></i> biometrik terenkripsi
             </div>
         </div>
 
+        <!-- HELLO MASTER -->
         <div id="helloMaster" class="hello-master screen">
             <h1>⚡ HELLO MASTER</h1>
             <button id="continueBtn" class="continue-btn">
@@ -648,66 +443,41 @@
             </button>
         </div>
 
+        <!-- MENU -->
         <div id="menuScreen" class="screen">
-            <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; padding: 0 6px;">
-                <span style="color: #82c2e0; font-size: 13px; letter-spacing: 2px;">
-                    <i class="fas fa-terminal" style="margin-right: 6px;"></i>ROOT
-                </span>
-                <span style="color: #3d7f9e; font-size: 11px;">
-                    <i class="fas fa-circle" style="color: #00ff88; font-size: 8px;"></i> ONLINE
-                </span>
+            <div style="display: flex; justify-content: space-between; width: 100%; padding: 0 6px;">
+                <span style="color: #82c2e0; font-size: 13px;"><i class="fas fa-terminal" style="margin-right: 6px;"></i>ROOT</span>
+                <span style="color: #3d7f9e; font-size: 11px;"><i class="fas fa-circle" style="color: #00ff88; font-size: 8px;"></i> ONLINE</span>
             </div>
             <div class="menu-grid">
-                <div class="menu-card attack" id="attackBtn">
-                    <i class="fas fa-skull-crossbones"></i>
-                    <span>ATTACK</span>
-                    <small>#exploit</small>
-                </div>
-                <div class="menu-card blocking" id="blockingBtn">
-                    <i class="fas fa-shield-halved"></i>
-                    <span>BLOCKING</span>
-                    <small>#firewall</small>
-                </div>
-                <div class="menu-card bugging">
-                    <i class="fas fa-bug"></i>
-                    <span>BUGGING</span>
-                    <small>#spy</small>
-                </div>
-                <div class="menu-card extract" id="extractBtn">
-                    <i class="fas fa-database"></i>
-                    <span>EXTRACT</span>
-                    <small>#dump</small>
-                </div>
+                <div class="menu-card attack" id="attackBtn"><i class="fas fa-skull-crossbones"></i><span>ATTACK</span><small>#exploit</small></div>
+                <div class="menu-card blocking" id="blockingBtn"><i class="fas fa-shield-halved"></i><span>BLOCKING</span><small>#firewall</small></div>
+                <div class="menu-card bugging"><i class="fas fa-bug"></i><span>BUGGING</span><small>#spy</small></div>
+                <div class="menu-card extract" id="extractBtn"><i class="fas fa-database"></i><span>EXTRACT</span><small>#dump</small></div>
             </div>
-            <div class="menu-footer">
-                <i class="fas fa-lock"></i>  SESSION: MASTER  <i class="fas fa-circle" style="color: #3ebdff; font-size: 6px; margin: 0 6px;"></i>  0x7F
-            </div>
+            <div class="menu-footer"><i class="fas fa-lock"></i> SESSION: MASTER <i class="fas fa-circle" style="color: #3ebdff; font-size: 6px; margin: 0 6px;"></i> 0x7F</div>
         </div>
     </div>
 
-    <!-- EXTRACT OVERLAY -->
+    <!-- EXTRACT -->
     <div id="extractOverlay" class="extract-overlay">
         <div class="extract-box">
             <h2><i class="fas fa-database"></i> EXTRACTING...</h2>
-            <div class="progress-container">
-                <div id="progressBar" class="progress-bar" style="width: 0%;"></div>
-            </div>
+            <div class="progress-container"><div id="progressBar" class="progress-bar" style="width:0%"></div></div>
             <div id="progressText" class="progress-text">0%</div>
-            <div id="extractSuccess" class="extract-success">
-                <i class="fas fa-check-circle"></i> Extract file successfully!
-            </div>
+            <div id="extractSuccess" class="extract-success"><i class="fas fa-check-circle"></i> Extract file successfully!</div>
             <button id="extractCloseBtn" class="extract-close-btn"><i class="fas fa-times"></i> CLOSE</button>
         </div>
     </div>
 
-    <!-- ATTACK OVERLAY -->
+    <!-- ATTACK -->
     <div id="attackOverlay">
         <canvas id="attackCanvas"></canvas>
         <div id="attackSuccess" class="attack-success">💀 100% SUCCESS</div>
         <button id="attackCloseBtn" class="attack-close-btn"><i class="fas fa-times"></i> CLOSE</button>
     </div>
 
-    <!-- BLOCKING OVERLAY -->
+    <!-- BLOCKING -->
     <div id="blockingOverlay">
         <div class="blocking-box">
             <h2><i class="fas fa-shield-halved"></i> DEFENDER</h2>
@@ -723,10 +493,10 @@
     <div id="shieldBreakContainer" class="shield-break-container"></div>
 
     <script>
-        (function(){
+        (function() {
             "use strict";
 
-            // ========== ELEMENTS ==========
+            // ===== ELEMENTS =====
             const loginScreen = document.getElementById('loginScreen');
             const helloMaster = document.getElementById('helloMaster');
             const menuScreen = document.getElementById('menuScreen');
@@ -735,7 +505,6 @@
             const blueSplash = document.getElementById('blueSplash');
             const continueBtn = document.getElementById('continueBtn');
 
-            // Extract
             const extractBtn = document.getElementById('extractBtn');
             const extractOverlay = document.getElementById('extractOverlay');
             const progressBar = document.getElementById('progressBar');
@@ -743,7 +512,6 @@
             const extractSuccess = document.getElementById('extractSuccess');
             const extractCloseBtn = document.getElementById('extractCloseBtn');
 
-            // Attack
             const attackBtn = document.getElementById('attackBtn');
             const attackOverlay = document.getElementById('attackOverlay');
             const attackSuccess = document.getElementById('attackSuccess');
@@ -751,7 +519,6 @@
             const canvas = document.getElementById('attackCanvas');
             const ctx = canvas.getContext('2d');
 
-            // Blocking
             const blockingBtn = document.getElementById('blockingBtn');
             const blockingOverlay = document.getElementById('blockingOverlay');
             const blockingInput = document.getElementById('blockingInput');
@@ -760,39 +527,31 @@
             const blockingCloseBtn = document.getElementById('blockingCloseBtn');
             const shieldContainer = document.getElementById('shieldBreakContainer');
 
-            // ========== STATE ==========
+            // ===== STATE =====
             let isLoggedIn = false;
             let isExtracting = false;
             let isAttacking = false;
             let shieldCount = 0;
-            let isRushMode = false;
             let rushInterval = null;
             let isProcessing = false;
+            let animationId = null;
 
-            // ========== SPLASH ==========
+            // ===== LOGIN =====
             function triggerBlueSplash() {
                 blueSplash.classList.remove('active');
                 void blueSplash.offsetWidth;
                 blueSplash.classList.add('active');
-                setTimeout(() => {
-                    blueSplash.classList.remove('active');
-                }, 1200);
+                setTimeout(() => { blueSplash.classList.remove('active'); }, 1200);
             }
 
             function showHelloMaster() {
                 loginScreen.style.display = 'none';
                 helloMaster.style.display = 'flex';
-                helloMaster.style.animation = 'none';
-                void helloMaster.offsetWidth;
-                helloMaster.style.animation = 'fadeGlow 0.8s ease';
             }
 
             function showMenu() {
                 helloMaster.style.display = 'none';
                 menuScreen.style.display = 'flex';
-                menuScreen.style.animation = 'none';
-                void menuScreen.offsetWidth;
-                menuScreen.style.animation = 'menuSlide 0.5s ease';
             }
 
             function handleFingerScan() {
@@ -809,25 +568,13 @@
                 }, 1000);
             }
 
-            fingerIcon.addEventListener('click', function(e) {
-                e.stopPropagation();
-                handleFingerScan();
-            });
-            fingerIcon.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                handleFingerScan();
-            }, { passive: false });
+            fingerIcon.addEventListener('click', handleFingerScan);
+            fingerIcon.addEventListener('touchstart', function(e) { e.preventDefault(); handleFingerScan(); }, { passive: false });
 
-            continueBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (isLoggedIn) showMenu();
-            });
-            continueBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                if (isLoggedIn) showMenu();
-            }, { passive: false });
+            continueBtn.addEventListener('click', function() { if (isLoggedIn) showMenu(); });
+            continueBtn.addEventListener('touchstart', function(e) { e.preventDefault(); if (isLoggedIn) showMenu(); }, { passive: false });
 
-            // ========== EXTRACT ==========
+            // ===== EXTRACT =====
             function runExtract() {
                 if (isExtracting) return;
                 isExtracting = true;
@@ -839,37 +586,25 @@
                 extractOverlay.classList.add('active');
 
                 let progress = 0;
-                const duration = 1000;
-                const interval = 50;
-                const step = (interval / duration) * 100;
-
                 const timer = setInterval(() => {
-                    progress += step;
+                    progress += 2;
                     if (progress >= 100) {
                         progress = 100;
                         clearInterval(timer);
                         progressBar.style.width = '100%';
                         progressText.textContent = '100%';
                         extractSuccess.style.display = 'block';
-                        setTimeout(() => {
-                            extractSuccess.classList.add('active');
-                        }, 50);
+                        setTimeout(() => { extractSuccess.classList.add('active'); }, 50);
                         isExtracting = false;
                     } else {
                         progressBar.style.width = progress + '%';
                         progressText.textContent = Math.floor(progress) + '%';
                     }
-                }, interval);
+                }, 20);
             }
 
-            extractBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                runExtract();
-            });
-            extractBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                runExtract();
-            }, { passive: false });
+            extractBtn.addEventListener('click', runExtract);
+            extractBtn.addEventListener('touchstart', function(e) { e.preventDefault(); runExtract(); }, { passive: false });
 
             function closeExtract() {
                 extractOverlay.classList.remove('active');
@@ -881,18 +616,10 @@
                     isExtracting = false;
                 }, 200);
             }
-
             extractCloseBtn.addEventListener('click', closeExtract);
-            extractCloseBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                closeExtract();
-            }, { passive: false });
+            extractCloseBtn.addEventListener('touchstart', function(e) { e.preventDefault(); closeExtract(); }, { passive: false });
 
-            extractOverlay.addEventListener('click', function(e) {
-                if (e.target === extractOverlay) closeExtract();
-            });
-
-            // ========== ATTACK ==========
+            // ===== ATTACK =====
             function initCanvas() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
@@ -916,52 +643,35 @@
                 function drawRain() {
                     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
                     ctx.fillStyle = '#00ff41';
                     ctx.font = '16px monospace';
-
                     for (let i = 0; i < drops.length; i++) {
                         const text = chars[Math.floor(Math.random() * chars.length)];
                         const x = i * 14;
                         const y = drops[i] * 16;
-
                         ctx.fillText(text, x, y);
-
-                        if (y > canvas.height && Math.random() > 0.975) {
-                            drops[i] = 0;
-                        }
+                        if (y > canvas.height && Math.random() > 0.975) { drops[i] = 0; }
                         drops[i]++;
                     }
-
                     animationId = requestAnimationFrame(drawRain);
                 }
 
                 drawRain();
 
                 setTimeout(() => {
-                    if (animationId) {
-                        cancelAnimationFrame(animationId);
-                        animationId = null;
-                    }
+                    if (animationId) { cancelAnimationFrame(animationId); animationId = null; }
                     ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
                     attackSuccess.style.display = 'block';
-                    setTimeout(() => {
-                        attackSuccess.classList.add('active');
-                    }, 50);
+                    setTimeout(() => { attackSuccess.classList.add('active'); }, 50);
                     attackCloseBtn.style.display = 'block';
-                    setTimeout(() => {
-                        attackCloseBtn.classList.add('active');
-                    }, 100);
+                    setTimeout(() => { attackCloseBtn.classList.add('active'); }, 100);
                     isAttacking = false;
                 }, 3000);
             }
 
             function closeAttack() {
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                    animationId = null;
-                }
+                if (animationId) { cancelAnimationFrame(animationId); animationId = null; }
                 attackOverlay.classList.remove('active');
                 attackSuccess.classList.remove('active');
                 attackSuccess.style.display = 'none';
@@ -971,28 +681,16 @@
                 isAttacking = false;
             }
 
-            attackBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                startMatrixRain();
-            });
-            attackBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                startMatrixRain();
-            }, { passive: false });
-
+            attackBtn.addEventListener('click', startMatrixRain);
+            attackBtn.addEventListener('touchstart', function(e) { e.preventDefault(); startMatrixRain(); }, { passive: false });
             attackCloseBtn.addEventListener('click', closeAttack);
-            attackCloseBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                closeAttack();
-            }, { passive: false });
+            attackCloseBtn.addEventListener('touchstart', function(e) { e.preventDefault(); closeAttack(); }, { passive: false });
 
             window.addEventListener('resize', function() {
-                if (attackOverlay.classList.contains('active')) {
-                    initCanvas();
-                }
+                if (attackOverlay.classList.contains('active')) { initCanvas(); }
             });
 
-            // ========== BLOCKING ==========
+            // ===== BLOCKING =====
             function showShieldBreak() {
                 const shield = document.createElement('div');
                 shield.className = 'shield-icon';
@@ -1000,33 +698,26 @@
                 shield.style.left = (Math.random() * 70 + 15) + '%';
                 shield.style.top = (Math.random() * 70 + 15) + '%';
                 shieldContainer.appendChild(shield);
-
-                setTimeout(() => {
-                    shield.remove();
-                }, 800);
+                setTimeout(() => { shield.remove(); }, 800);
             }
 
             function updateRushStatus() {
                 if (shieldCount < 40) {
-                    let msg = '⏳ RUSHING IS ON GOING, PLS CALM DOWN<br>';
-                    msg += '<span style="font-size:12px;color:#ffb34777;">shield break: ' + shieldCount + '/40</span>';
-                    blockingStatus.innerHTML = msg;
+                    blockingStatus.innerHTML = '⏳ RUSHING IS ON GOING, PLS CALM DOWN<br><span style="font-size:12px;color:#ffb34777;">shield break: ' + shieldCount + '/40</span>';
                 }
             }
 
             function startRushMode() {
-                isRushMode = true;
-                let speed = 200;
+                if (rushInterval) { clearInterval(rushInterval); rushInterval = null; }
                 shieldCount = 0;
                 shieldContainer.innerHTML = '';
-
-                if (rushInterval) clearInterval(rushInterval);
+                isProcessing = true;
+                let speed = 200;
 
                 function doRush() {
                     if (shieldCount >= 40) {
                         clearInterval(rushInterval);
                         rushInterval = null;
-                        isRushMode = false;
                         blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
                         blockingCloseBtn.classList.add('active');
                         blockingCloseBtn.style.display = 'inline-block';
@@ -1041,11 +732,9 @@
                             showShieldBreak();
                             shieldCount++;
                             updateRushStatus();
-
                             if (shieldCount >= 40) {
                                 clearInterval(rushInterval);
                                 rushInterval = null;
-                                isRushMode = false;
                                 blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
                                 blockingCloseBtn.classList.add('active');
                                 blockingCloseBtn.style.display = 'inline-block';
@@ -1053,8 +742,6 @@
                             }
                         }, i * 100);
                     }
-
-                    // Percepat
                     if (speed > 50) speed -= 5;
                 }
 
@@ -1079,11 +766,7 @@
                         blockingCloseBtn.classList.remove('active');
                         blockingCloseBtn.style.display = 'none';
                         shieldCount = 0;
-                        isRushMode = false;
-                        if (rushInterval) {
-                            clearInterval(rushInterval);
-                            rushInterval = null;
-                        }
+                        if (rushInterval) { clearInterval(rushInterval); rushInterval = null; }
                         isProcessing = false;
                         blockingStatus.innerHTML = '⚡ siap';
                         shieldContainer.innerHTML = '';
@@ -1094,10 +777,7 @@
                 // RUSH MODE
                 if (hasFunc && fCount !== 3) {
                     blockingStatus.innerHTML = '⚡ RUSH MODE ACTIVATED!';
-                    shieldCount = 0;
-                    shieldContainer.innerHTML = '';
                     startRushMode();
-                    isProcessing = false;
                     return;
                 }
 
@@ -1114,16 +794,6 @@
                         isProcessing = false;
                         return;
                     }
-
-                    if (hasFunc) {
-                        blockingStatus.innerHTML = '⚡ RUSH MODE ACTIVATED!';
-                        shieldCount = 0;
-                        shieldContainer.innerHTML = '';
-                        startRushMode();
-                        isProcessing = false;
-                        return;
-                    }
-
                     isProcessing = false;
                     return;
                 }
@@ -1142,11 +812,7 @@
                 blockingCloseBtn.style.display = 'none';
                 shieldCount = 0;
                 shieldContainer.innerHTML = '';
-                isRushMode = false;
-                if (rushInterval) {
-                    clearInterval(rushInterval);
-                    rushInterval = null;
-                }
+                if (rushInterval) { clearInterval(rushInterval); rushInterval = null; }
                 isProcessing = false;
                 setTimeout(() => blockingInput.focus(), 300);
             });
@@ -1173,11 +839,7 @@
                 blockingCloseBtn.classList.remove('active');
                 blockingCloseBtn.style.display = 'none';
                 shieldCount = 0;
-                isRushMode = false;
-                if (rushInterval) {
-                    clearInterval(rushInterval);
-                    rushInterval = null;
-                }
+                if (rushInterval) { clearInterval(rushInterval); rushInterval = null; }
                 isProcessing = false;
                 blockingStatus.innerHTML = '⚡ siap';
                 shieldContainer.innerHTML = '';
@@ -1189,7 +851,7 @@
                 closeBlocking();
             }, { passive: false });
 
-            // ========== MENU LAIN ==========
+            // ===== MENU LAIN =====
             document.querySelectorAll('.menu-card:not(.extract):not(#attackBtn):not(#blockingBtn)').forEach(card => {
                 card.addEventListener('click', function() {
                     this.style.transform = 'scale(0.92)';
@@ -1203,8 +865,8 @@
                 });
             });
 
-            console.log('🔮 CYBER DECK · MASTER siap.');
+            console.log('🔮 CYBER DECK siap.');
         })();
     </script>
 </body>
-</html>
+</html> 
