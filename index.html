@@ -259,10 +259,11 @@
             color: #ffb347;
             text-shadow: 0 0 40px #ffb347, 0 0 80px #ffb34755;
             position: absolute;
-            animation: shieldBreak 0.6s ease forwards;
+            animation: shieldBreak 0.8s ease forwards;
         }
         @keyframes shieldBreak {
-            0% { transform: scale(0.5) rotate(0deg); opacity: 1; }
+            0% { transform: scale(0.3) rotate(0deg); opacity: 1; }
+            30% { transform: scale(1.2) rotate(15deg); opacity: 1; }
             100% { transform: scale(2) rotate(45deg); opacity: 0; }
         }
         .rush-final { color: #ff0000; font-size: 24px; font-weight: 700; text-shadow: 0 0 40px #ff0000; animation: finalPulse 0.3s ease infinite alternate; }
@@ -869,4 +870,4 @@
         })();
     </script>
 </body>
-</html> 
+</html>
