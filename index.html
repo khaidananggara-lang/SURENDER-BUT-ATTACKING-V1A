@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🔮 CYBER DECK · MASTER</title>
-    <!-- Font & Ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -21,9 +20,9 @@
             justify-content: center;
             align-items: center;
             padding: 16px;
+            overflow-x: hidden;
         }
 
-        /* Terminal utama */
         .cyber-terminal {
             max-width: 500px;
             width: 100%;
@@ -36,9 +35,9 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            z-index: 10;
         }
 
-        /* layar utama */
         .screen {
             display: flex;
             flex-direction: column;
@@ -49,7 +48,6 @@
             transition: opacity 0.6s ease;
         }
 
-        /* ===== LOGIN FINGER ===== */
         #loginScreen {
             display: flex;
             flex-direction: column;
@@ -95,7 +93,6 @@
             color: #4fc3ff;
         }
 
-        /* efek sidik jari biru (scan overlay) */
         .fingerprint-glow {
             position: relative;
             display: flex;
@@ -125,7 +122,6 @@
             100% { transform: scale(6); opacity: 0; }
         }
 
-        /* splash biru full layar (efek menyebar) */
         .blue-splash {
             position: fixed;
             top: 0;
@@ -150,7 +146,6 @@
             100% { opacity: 0; transform: scale(2.5); }
         }
 
-        /* HELLO MASTER */
         .hello-master {
             display: none;
             flex-direction: column;
@@ -208,7 +203,6 @@
             box-shadow: 0 0 45px #0088ff;
         }
 
-        /* ===== MENU HACKER ===== */
         #menuScreen {
             display: none;
             flex-direction: column;
@@ -239,11 +233,12 @@
             color: #ccf0ff;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
             transition: 0.15s ease;
-            cursor: default;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 6px;
+            position: relative;
         }
 
         .menu-card i {
@@ -295,37 +290,6 @@
             margin: 0 4px;
         }
 
-        /* status */
-        .status-light {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            font-size: 11px;
-            color: #4c8aa3;
-            margin-bottom: 6px;
-        }
-
-        .status-light i {
-            color: #3ebdff;
-        }
-
-        /* responsif */
-        @media (max-width: 430px) {
-            .cyber-terminal { padding: 20px 12px; }
-            .hello-master h1 { font-size: 28px; letter-spacing: 4px; }
-            .menu-card i { font-size: 28px; }
-            .menu-card span { font-size: 16px; }
-        }
-
-        /* hide scanner */
-        .hidden {
-            display: none !important;
-        }
-
-        .fingerprint-glow {
-            position: relative;
-        }
-
         .glow-ring {
             position: absolute;
             border-radius: 50%;
@@ -342,14 +306,224 @@
             50% { opacity: 0.8; }
             100% { transform: rotate(360deg) scale(1.1); opacity: 0.2; }
         }
+
+        /* ===== EXTRACT ===== */
+        .extract-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 10, 25, 0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .extract-overlay.active {
+            display: flex;
+            animation: fadeInOverlay 0.3s ease;
+        }
+
+        @keyframes fadeInOverlay {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .extract-box {
+            background: rgba(8, 20, 45, 0.9);
+            border: 1px solid #bb86fc;
+            border-radius: 30px;
+            padding: 40px 30px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 60px #bb86fc33;
+        }
+
+        .extract-box h2 {
+            color: #bb86fc;
+            font-size: 22px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #bb86fc55;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 14px;
+            background: #1a2a45;
+            border-radius: 30px;
+            overflow: hidden;
+            margin: 16px 0;
+            border: 1px solid #bb86fc44;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #6f42c1, #bb86fc, #6f42c1);
+            background-size: 200% 100%;
+            border-radius: 30px;
+            transition: width 0.1s linear;
+            animation: shimmer 0.6s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .progress-text {
+            color: #a78cd6;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 20px #bb86fc44;
+        }
+
+        .extract-success {
+            display: none;
+            color: #6fcf97;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-top: 16px;
+            text-shadow: 0 0 30px #6fcf9755;
+            animation: successPulse 0.8s ease;
+        }
+
+        .extract-success.active {
+            display: block;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .extract-close-btn {
+            margin-top: 24px;
+            background: transparent;
+            border: 1px solid #bb86fc66;
+            color: #bb86fc;
+            padding: 12px 40px;
+            border-radius: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 2px;
+            background: rgba(187, 134, 252, 0.05);
+        }
+
+        .extract-close-btn:active {
+            transform: scale(0.94);
+            background: rgba(187, 134, 252, 0.15);
+        }
+
+        /* ===== ATTACK - MATRIX RAIN ===== */
+        #attackOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #attackOverlay.active {
+            display: flex;
+        }
+
+        #attackCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .attack-success {
+            position: relative;
+            z-index: 10;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            text-shadow: 0 0 40px #00ff41, 0 0 80px #00ff4188;
+            animation: attackSuccessPulse 0.5s ease;
+            letter-spacing: 4px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px 50px;
+            border-radius: 20px;
+            border: 2px solid #00ff4166;
+            display: none;
+        }
+
+        .attack-success.active {
+            display: block;
+            animation: attackSuccessPulse 0.5s ease;
+        }
+
+        @keyframes attackSuccessPulse {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .attack-close-btn {
+            position: relative;
+            z-index: 10;
+            margin-top: 40px;
+            background: transparent;
+            border: 1px solid #00ff4166;
+            color: #00ff41;
+            padding: 12px 40px;
+            border-radius: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 2px;
+            background: rgba(0, 255, 65, 0.05);
+            display: none;
+        }
+
+        .attack-close-btn.active {
+            display: block;
+        }
+
+        .attack-close-btn:active {
+            transform: scale(0.94);
+            background: rgba(0, 255, 65, 0.15);
+        }
+
+        @media (max-width: 430px) {
+            .cyber-terminal { padding: 20px 12px; }
+            .hello-master h1 { font-size: 28px; letter-spacing: 4px; }
+            .menu-card i { font-size: 28px; }
+            .menu-card span { font-size: 16px; }
+            .extract-box { padding: 30px 18px; }
+            .attack-success { font-size: 28px; padding: 16px 24px; }
+        }
     </style>
 </head>
 <body>
-    <!-- SPLASH BIRU (efek menyebar ke seluruh layar) -->
     <div id="blueSplash" class="blue-splash"></div>
 
     <div class="cyber-terminal">
-        <!-- LOGIN SCREEN (sidik jari) -->
         <div id="loginScreen" class="screen">
             <div class="fingerprint-glow">
                 <div class="glow-ring"></div>
@@ -366,7 +540,6 @@
             </div>
         </div>
 
-        <!-- HELLO MASTER (setelah sidik) -->
         <div id="helloMaster" class="hello-master screen">
             <h1>⚡ HELLO MASTER</h1>
             <button id="continueBtn" class="continue-btn">
@@ -374,7 +547,6 @@
             </button>
         </div>
 
-        <!-- MENU UTAMA HACKER -->
         <div id="menuScreen" class="screen">
             <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; padding: 0 6px;">
                 <span style="color: #82c2e0; font-size: 13px; letter-spacing: 2px;">
@@ -385,7 +557,7 @@
                 </span>
             </div>
             <div class="menu-grid">
-                <div class="menu-card attack">
+                <div class="menu-card attack" id="attackBtn">
                     <i class="fas fa-skull-crossbones"></i>
                     <span>ATTACK</span>
                     <small>#exploit</small>
@@ -400,7 +572,7 @@
                     <span>BUGGING</span>
                     <small>#spy</small>
                 </div>
-                <div class="menu-card extract">
+                <div class="menu-card extract" id="extractBtn">
                     <i class="fas fa-database"></i>
                     <span>EXTRACT</span>
                     <small>#dump</small>
@@ -410,6 +582,28 @@
                 <i class="fas fa-lock"></i>  SESSION: MASTER  <i class="fas fa-circle" style="color: #3ebdff; font-size: 6px; margin: 0 6px;"></i>  0x7F
             </div>
         </div>
+    </div>
+
+    <!-- EXTRACT OVERLAY -->
+    <div id="extractOverlay" class="extract-overlay">
+        <div class="extract-box">
+            <h2><i class="fas fa-database"></i> EXTRACTING...</h2>
+            <div class="progress-container">
+                <div id="progressBar" class="progress-bar" style="width: 0%;"></div>
+            </div>
+            <div id="progressText" class="progress-text">0%</div>
+            <div id="extractSuccess" class="extract-success">
+                <i class="fas fa-check-circle"></i> Extract file successfully!
+            </div>
+            <button id="extractCloseBtn" class="extract-close-btn"><i class="fas fa-times"></i> CLOSE</button>
+        </div>
+    </div>
+
+    <!-- ATTACK OVERLAY -->
+    <div id="attackOverlay">
+        <canvas id="attackCanvas"></canvas>
+        <div id="attackSuccess" class="attack-success">💀 100% SUCCESS</div>
+        <button id="attackCloseBtn" class="attack-close-btn"><i class="fas fa-times"></i> CLOSE</button>
     </div>
 
     <script>
@@ -424,113 +618,268 @@
             const blueSplash = document.getElementById('blueSplash');
             const continueBtn = document.getElementById('continueBtn');
 
-            // state
-            let isLoggedIn = false;
+            // Extract
+            const extractBtn = document.getElementById('extractBtn');
+            const extractOverlay = document.getElementById('extractOverlay');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const extractSuccess = document.getElementById('extractSuccess');
+            const extractCloseBtn = document.getElementById('extractCloseBtn');
 
-            // fungsi reset splash
+            // Attack
+            const attackBtn = document.getElementById('attackBtn');
+            const attackOverlay = document.getElementById('attackOverlay');
+            const attackSuccess = document.getElementById('attackSuccess');
+            const attackCloseBtn = document.getElementById('attackCloseBtn');
+            const canvas = document.getElementById('attackCanvas');
+            const ctx = canvas.getContext('2d');
+
+            let isLoggedIn = false;
+            let isExtracting = false;
+            let isAttacking = false;
+            let animationId = null;
+
+            // === SPLASH ===
             function triggerBlueSplash() {
-                // reset animasi
                 blueSplash.classList.remove('active');
-                // force reflow
                 void blueSplash.offsetWidth;
                 blueSplash.classList.add('active');
-                // hilangin setelah animasi selesai
                 setTimeout(() => {
                     blueSplash.classList.remove('active');
                 }, 1200);
             }
 
-            // fungsi pindah ke HELLO MASTER
             function showHelloMaster() {
-                // sembunyikan login
                 loginScreen.style.display = 'none';
-                // tampilkan hello master
                 helloMaster.style.display = 'flex';
-                // efek suara? (tapi kita pakai visual)
-                // reset animasi hello
                 helloMaster.style.animation = 'none';
                 void helloMaster.offsetWidth;
                 helloMaster.style.animation = 'fadeGlow 0.8s ease';
             }
 
-            // fungsi lanjut ke menu
             function showMenu() {
                 helloMaster.style.display = 'none';
                 menuScreen.style.display = 'flex';
-                // reset animasi menu
                 menuScreen.style.animation = 'none';
                 void menuScreen.offsetWidth;
                 menuScreen.style.animation = 'menuSlide 0.5s ease';
             }
 
-            // ---- PROSES SCAN FINGER ----
             function handleFingerScan() {
                 if (isLoggedIn) return;
-
-                // 1. efek gelombang biru lokal (di sekitar sidik)
                 blueWave.classList.remove('active');
                 void blueWave.offsetWidth;
                 blueWave.classList.add('active');
-
-                // 2. efek splash besar (menyebar ke seluruh layar)
                 triggerBlueSplash();
-
-                // 3. setelah animasi splash & wave, pindah ke HELLO MASTER
-                //    waktu delay cocok dengan durasi animasi splash (1.2s)
                 setTimeout(() => {
-                    // pastikan belum login
                     if (!isLoggedIn) {
                         isLoggedIn = true;
                         showHelloMaster();
                     }
-                }, 1000); // sedikit sebelum splash selesai agar mulus
+                }, 1000);
             }
 
-            // event listener finger (klik)
             fingerIcon.addEventListener('click', function(e) {
                 e.stopPropagation();
                 handleFingerScan();
             });
-
-            // sentuhan juga (mobile)
             fingerIcon.addEventListener('touchstart', function(e) {
                 e.preventDefault();
                 handleFingerScan();
             }, { passive: false });
 
-            // continue button -> masuk menu
             continueBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                if (isLoggedIn) {
-                    showMenu();
+                if (isLoggedIn) showMenu();
+            });
+            continueBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                if (isLoggedIn) showMenu();
+            }, { passive: false });
+
+            // === EXTRACT ===
+            function runExtract() {
+                if (isExtracting) return;
+                isExtracting = true;
+
+                progressBar.style.width = '0%';
+                progressText.textContent = '0%';
+                extractSuccess.classList.remove('active');
+                extractSuccess.style.display = 'none';
+                extractOverlay.classList.add('active');
+
+                let progress = 0;
+                const duration = 1000;
+                const interval = 50;
+                const step = (interval / duration) * 100;
+
+                const timer = setInterval(() => {
+                    progress += step;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(timer);
+                        progressBar.style.width = '100%';
+                        progressText.textContent = '100%';
+                        extractSuccess.style.display = 'block';
+                        setTimeout(() => {
+                            extractSuccess.classList.add('active');
+                        }, 50);
+                        isExtracting = false;
+                    } else {
+                        progressBar.style.width = progress + '%';
+                        progressText.textContent = Math.floor(progress) + '%';
+                    }
+                }, interval);
+            }
+
+            extractBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                runExtract();
+            });
+            extractBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                runExtract();
+            }, { passive: false });
+
+            function closeExtract() {
+                extractOverlay.classList.remove('active');
+                setTimeout(() => {
+                    progressBar.style.width = '0%';
+                    progressText.textContent = '0%';
+                    extractSuccess.classList.remove('active');
+                    extractSuccess.style.display = 'none';
+                    isExtracting = false;
+                }, 200);
+            }
+
+            extractCloseBtn.addEventListener('click', closeExtract);
+            extractCloseBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                closeExtract();
+            }, { passive: false });
+
+            extractOverlay.addEventListener('click', function(e) {
+                if (e.target === extractOverlay) closeExtract();
+            });
+
+            // === ATTACK - MATRIX RAIN ===
+            function initCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function startMatrixRain() {
+                if (isAttacking) return;
+                isAttacking = true;
+
+                initCanvas();
+                attackOverlay.classList.add('active');
+                attackSuccess.classList.remove('active');
+                attackSuccess.style.display = 'none';
+                attackCloseBtn.classList.remove('active');
+                attackCloseBtn.style.display = 'none';
+
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+                const columns = Math.floor(canvas.width / 14);
+                const drops = Array(columns).fill(1);
+
+                function drawRain() {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.fillStyle = '#00ff41';
+                    ctx.font = '16px monospace';
+
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = chars[Math.floor(Math.random() * chars.length)];
+                        const x = i * 14;
+                        const y = drops[i] * 16;
+
+                        ctx.fillText(text, x, y);
+
+                        if (y > canvas.height && Math.random() > 0.975) {
+                            drops[i] = 0;
+                        }
+                        drops[i]++;
+                    }
+
+                    animationId = requestAnimationFrame(drawRain);
+                }
+
+                drawRain();
+
+                // 3 detik -> muncul SUCCESS
+                setTimeout(() => {
+                    if (animationId) {
+                        cancelAnimationFrame(animationId);
+                        animationId = null;
+                    }
+                    // Bersihkan canvas
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    // Tampilkan success
+                    attackSuccess.style.display = 'block';
+                    setTimeout(() => {
+                        attackSuccess.classList.add('active');
+                    }, 50);
+                    attackCloseBtn.style.display = 'block';
+                    setTimeout(() => {
+                        attackCloseBtn.classList.add('active');
+                    }, 100);
+                    isAttacking = false;
+                }, 3000);
+            }
+
+            function closeAttack() {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+                attackOverlay.classList.remove('active');
+                attackSuccess.classList.remove('active');
+                attackSuccess.style.display = 'none';
+                attackCloseBtn.classList.remove('active');
+                attackCloseBtn.style.display = 'none';
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                isAttacking = false;
+            }
+
+            attackBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                startMatrixRain();
+            });
+            attackBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                startMatrixRain();
+            }, { passive: false });
+
+            attackCloseBtn.addEventListener('click', closeAttack);
+            attackCloseBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                closeAttack();
+            }, { passive: false });
+
+            // Resize canvas
+            window.addEventListener('resize', function() {
+                if (attackOverlay.classList.contains('active')) {
+                    initCanvas();
                 }
             });
 
-            continueBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                if (isLoggedIn) {
-                    showMenu();
-                }
-            }, { passive: false });
-
-            // efek tambahan: card menu diberi sentuhan interaktif (hanya visual)
-            document.querySelectorAll('.menu-card').forEach(card => {
+            // === MENU LAIN ===
+            document.querySelectorAll('.menu-card:not(.extract):not(#attackBtn)').forEach(card => {
                 card.addEventListener('click', function() {
-                    // efek getar kecil
                     this.style.transform = 'scale(0.92)';
                     setTimeout(() => { this.style.transform = ''; }, 150);
-                    // notifikasi kecil (hanya mainan)
-                    const label = this.querySelector('span')?.innerText || 'command';
-                    const originalText = this.querySelector('small')?.innerText || '';
                     const smallEl = this.querySelector('small');
                     if (smallEl) {
+                        const originalText = smallEl.innerText;
                         smallEl.innerText = '✓ executing';
                         setTimeout(() => { smallEl.innerText = originalText; }, 600);
                     }
                 });
             });
 
-            // reset jika ada error (tapi kita biarkan)
             console.log('🔮 CYBER DECK · MASTER siap.');
         })();
     </script>
