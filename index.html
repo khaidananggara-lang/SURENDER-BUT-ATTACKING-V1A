@@ -307,6 +307,199 @@
             100% { transform: rotate(360deg) scale(1.1); opacity: 0.2; }
         }
 
+        /* ===== BLOCKING / DEFENDER ===== */
+        #blockingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 10, 25, 0.92);
+            backdrop-filter: blur(12px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            flex-direction: column;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        #blockingOverlay.active {
+            display: flex;
+            animation: fadeInOverlay 0.3s ease;
+        }
+
+        @keyframes fadeInOverlay {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .blocking-box {
+            background: rgba(8, 20, 45, 0.9);
+            border: 1px solid #ffb347;
+            border-radius: 30px;
+            padding: 35px 25px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 60px #ffb34722;
+            position: relative;
+        }
+
+        .blocking-box h2 {
+            color: #ffb347;
+            font-size: 22px;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px #ffb34755;
+        }
+
+        .blocking-box .sub {
+            color: #d48c3a;
+            font-size: 13px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .blocking-input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(0, 20, 40, 0.7);
+            border: 1.5px solid #ffb34766;
+            border-radius: 16px;
+            color: #ffd7a0;
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            letter-spacing: 2px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .blocking-input:focus {
+            border-color: #ffb347;
+            box-shadow: 0 0 30px #ffb34733;
+        }
+
+        .blocking-input::placeholder {
+            color: #5a4a3a;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .blocking-btn {
+            margin-top: 16px;
+            background: transparent;
+            border: 1.5px solid #ffb347;
+            color: #ffb347;
+            padding: 12px 40px;
+            border-radius: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 2px;
+            background: rgba(255, 179, 71, 0.05);
+            width: 100%;
+        }
+
+        .blocking-btn:active {
+            transform: scale(0.94);
+            background: rgba(255, 179, 71, 0.15);
+        }
+
+        .blocking-status {
+            margin-top: 16px;
+            color: #d48c3a;
+            font-size: 14px;
+            letter-spacing: 1px;
+            min-height: 30px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Shield Break Animation */
+        .shield-break-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .shield-icon {
+            font-size: 80px;
+            color: #ffb347;
+            text-shadow: 0 0 40px #ffb347, 0 0 80px #ffb34755;
+            animation: shieldBreak 0.6s ease forwards;
+            position: absolute;
+        }
+
+        @keyframes shieldBreak {
+            0% { transform: scale(0.5) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.5) rotate(20deg); opacity: 1; }
+            100% { transform: scale(2) rotate(45deg); opacity: 0; }
+        }
+
+        .rush-text {
+            color: #ff6b6b;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            animation: pulseRush 0.5s ease infinite alternate;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 30px #ff6b6b55;
+        }
+
+        @keyframes pulseRush {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .rush-final {
+            color: #ff0000;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-shadow: 0 0 40px #ff0000, 0 0 80px #ff000066;
+            animation: finalPulse 0.3s ease infinite alternate;
+            font-family: 'Courier New', monospace;
+        }
+
+        @keyframes finalPulse {
+            0% { transform: scale(1); text-shadow: 0 0 40px #ff0000; }
+            100% { transform: scale(1.1); text-shadow: 0 0 80px #ff0000, 0 0 120px #ff000044; }
+        }
+
+        .blocking-close-btn {
+            margin-top: 16px;
+            background: transparent;
+            border: 1px solid #ffb34766;
+            color: #ffb347;
+            padding: 12px 40px;
+            border-radius: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 2px;
+            background: rgba(255, 179, 71, 0.05);
+            display: none;
+        }
+
+        .blocking-close-btn.active {
+            display: inline-block;
+        }
+
+        .blocking-close-btn:active {
+            transform: scale(0.94);
+            background: rgba(255, 179, 71, 0.15);
+        }
+
         /* ===== EXTRACT ===== */
         .extract-overlay {
             position: fixed;
@@ -328,11 +521,6 @@
         .extract-overlay.active {
             display: flex;
             animation: fadeInOverlay 0.3s ease;
-        }
-
-        @keyframes fadeInOverlay {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
         }
 
         .extract-box {
@@ -428,7 +616,7 @@
             background: rgba(187, 134, 252, 0.15);
         }
 
-        /* ===== ATTACK - MATRIX RAIN ===== */
+        /* ===== ATTACK ===== */
         #attackOverlay {
             position: fixed;
             top: 0;
@@ -517,6 +705,8 @@
             .menu-card span { font-size: 16px; }
             .extract-box { padding: 30px 18px; }
             .attack-success { font-size: 28px; padding: 16px 24px; }
+            .blocking-box { padding: 25px 16px; }
+            .shield-icon { font-size: 60px; }
         }
     </style>
 </head>
@@ -562,7 +752,7 @@
                     <span>ATTACK</span>
                     <small>#exploit</small>
                 </div>
-                <div class="menu-card blocking">
+                <div class="menu-card blocking" id="blockingBtn">
                     <i class="fas fa-shield-halved"></i>
                     <span>BLOCKING</span>
                     <small>#firewall</small>
@@ -606,10 +796,26 @@
         <button id="attackCloseBtn" class="attack-close-btn"><i class="fas fa-times"></i> CLOSE</button>
     </div>
 
+    <!-- BLOCKING OVERLAY -->
+    <div id="blockingOverlay">
+        <div class="blocking-box">
+            <h2><i class="fas fa-shield-halved"></i> DEFENDER</h2>
+            <div class="sub">MASUKKAN KODE AKSES</div>
+            <input type="text" id="blockingInput" class="blocking-input" placeholder="ketik kode..." autofocus>
+            <button id="blockingSubmitBtn" class="blocking-btn"><i class="fas fa-key"></i> VERIFY</button>
+            <div id="blockingStatus" class="blocking-status">⚡ siap</div>
+            <button id="blockingCloseBtn" class="blocking-close-btn"><i class="fas fa-times"></i> CLOSE</button>
+        </div>
+    </div>
+
+    <!-- SHIELD BREAK CONTAINER -->
+    <div id="shieldBreakContainer" class="shield-break-container"></div>
+
     <script>
         (function(){
             "use strict";
 
+            // ========== ELEMENTS ==========
             const loginScreen = document.getElementById('loginScreen');
             const helloMaster = document.getElementById('helloMaster');
             const menuScreen = document.getElementById('menuScreen');
@@ -634,12 +840,28 @@
             const canvas = document.getElementById('attackCanvas');
             const ctx = canvas.getContext('2d');
 
+            // Blocking
+            const blockingBtn = document.getElementById('blockingBtn');
+            const blockingOverlay = document.getElementById('blockingOverlay');
+            const blockingInput = document.getElementById('blockingInput');
+            const blockingSubmitBtn = document.getElementById('blockingSubmitBtn');
+            const blockingStatus = document.getElementById('blockingStatus');
+            const blockingCloseBtn = document.getElementById('blockingCloseBtn');
+            const shieldContainer = document.getElementById('shieldBreakContainer');
+
+            // ========== STATE ==========
             let isLoggedIn = false;
             let isExtracting = false;
             let isAttacking = false;
+            let isBlockingActive = false;
             let animationId = null;
+            let shieldCount = 0;
+            let isRushMode = false;
+            let rushInterval = null;
+            let rushCount = 0;
+            let isProcessing = false;
 
-            // === SPLASH ===
+            // ========== SPLASH ==========
             function triggerBlueSplash() {
                 blueSplash.classList.remove('active');
                 void blueSplash.offsetWidth;
@@ -697,7 +919,7 @@
                 if (isLoggedIn) showMenu();
             }, { passive: false });
 
-            // === EXTRACT ===
+            // ========== EXTRACT ==========
             function runExtract() {
                 if (isExtracting) return;
                 isExtracting = true;
@@ -762,7 +984,7 @@
                 if (e.target === extractOverlay) closeExtract();
             });
 
-            // === ATTACK - MATRIX RAIN ===
+            // ========== ATTACK ==========
             function initCanvas() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
@@ -808,16 +1030,13 @@
 
                 drawRain();
 
-                // 3 detik -> muncul SUCCESS
                 setTimeout(() => {
                     if (animationId) {
                         cancelAnimationFrame(animationId);
                         animationId = null;
                     }
-                    // Bersihkan canvas
                     ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    // Tampilkan success
                     attackSuccess.style.display = 'block';
                     setTimeout(() => {
                         attackSuccess.classList.add('active');
@@ -859,15 +1078,268 @@
                 closeAttack();
             }, { passive: false });
 
-            // Resize canvas
             window.addEventListener('resize', function() {
                 if (attackOverlay.classList.contains('active')) {
                     initCanvas();
                 }
             });
 
-            // === MENU LAIN ===
-            document.querySelectorAll('.menu-card:not(.extract):not(#attackBtn)').forEach(card => {
+            // ========== BLOCKING ==========
+            function showShieldBreak() {
+                const shield = document.createElement('div');
+                shield.className = 'shield-icon';
+                shield.innerHTML = '<i class="fas fa-shield-halved"></i>';
+                shield.style.left = (Math.random() * 70 + 15) + '%';
+                shield.style.top = (Math.random() * 70 + 15) + '%';
+                shieldContainer.appendChild(shield);
+
+                setTimeout(() => {
+                    shield.remove();
+                }, 800);
+            }
+
+            function triggerShieldBreak(count) {
+                for (let i = 0; i < count; i++) {
+                    setTimeout(() => {
+                        showShieldBreak();
+                        shieldCount++;
+                        updateRushStatus();
+
+                        if (shieldCount >= 40) {
+                            // FINAL
+                            clearInterval(rushInterval);
+                            rushInterval = null;
+                            isRushMode = false;
+                            blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
+                            blockingCloseBtn.classList.add('active');
+                            blockingCloseBtn.style.display = 'inline-block';
+                            isProcessing = false;
+                        }
+                    }, i * 200); // default 200ms, akan di-override oleh rush
+                }
+            }
+
+            function updateRushStatus() {
+                if (shieldCount < 40) {
+                    let msg = '⏳ RUSHING IS ON GOING, PLS CALM DOWN<br>';
+                    msg += '<span style="font-size:12px;color:#ffb34777;">shield break: ' + shieldCount + '/40</span>';
+                    blockingStatus.innerHTML = msg;
+                }
+            }
+
+            function startRushMode() {
+                isRushMode = true;
+                let speed = 200; // ms per break
+                let counter = 0;
+
+                if (rushInterval) clearInterval(rushInterval);
+
+                rushInterval = setInterval(() => {
+                    if (shieldCount >= 40) {
+                        clearInterval(rushInterval);
+                        rushInterval = null;
+                        isRushMode = false;
+                        return;
+                    }
+
+                    // Pecah 3 shield sekaligus
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            if (shieldCount >= 40) return;
+                            showShieldBreak();
+                            shieldCount++;
+                            updateRushStatus();
+
+                            if (shieldCount >= 40) {
+                                clearInterval(rushInterval);
+                                rushInterval = null;
+                                isRushMode = false;
+                                blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
+                                blockingCloseBtn.classList.add('active');
+                                blockingCloseBtn.style.display = 'inline-block';
+                                isProcessing = false;
+                            }
+                        }, i * 100);
+                    }
+
+                    // Percepat terus (speed makin kecil)
+                    if (speed > 50) {
+                        speed -= 5;
+                    }
+                    counter++;
+
+                    // Reset interval dengan speed baru
+                    if (rushInterval) {
+                        clearInterval(rushInterval);
+                        rushInterval = setInterval(() => {
+                            // Re-run logic
+                            if (shieldCount >= 40) {
+                                clearInterval(rushInterval);
+                                rushInterval = null;
+                                isRushMode = false;
+                                return;
+                            }
+                            for (let i = 0; i < 3; i++) {
+                                setTimeout(() => {
+                                    if (shieldCount >= 40) return;
+                                    showShieldBreak();
+                                    shieldCount++;
+                                    updateRushStatus();
+                                    if (shieldCount >= 40) {
+                                        clearInterval(rushInterval);
+                                        rushInterval = null;
+                                        isRushMode = false;
+                                        blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
+                                        blockingCloseBtn.classList.add('active');
+                                        blockingCloseBtn.style.display = 'inline-block';
+                                        isProcessing = false;
+                                    }
+                                }, i * 100);
+                            }
+                            if (speed > 50) {
+                                speed -= 5;
+                            }
+                        }, speed);
+                    }
+                }, speed);
+            }
+
+            function handleBlocking() {
+                if (isProcessing) return;
+                isProcessing = true;
+
+                const input = blockingInput.value.trim();
+                blockingInput.value = '';
+
+                // Cek apakah input mengandung .(function/dxl)
+                const hasFunc = input.includes('.(function/dxl)');
+
+                // Hitung jumlah huruf 'f'
+                const fCount = (input.match(/f/g) || []).length;
+
+                // Kondisi sukses: fff.bench
+                if (input === 'fff.bench') {
+                    blockingStatus.innerHTML = '✅ ACCESS GRANTED!';
+                    setTimeout(() => {
+                        blockingOverlay.classList.remove('active');
+                        blockingCloseBtn.classList.remove('active');
+                        blockingCloseBtn.style.display = 'none';
+                        shieldCount = 0;
+                        isRushMode = false;
+                        if (rushInterval) {
+                            clearInterval(rushInterval);
+                            rushInterval = null;
+                        }
+                        isProcessing = false;
+                        blockingStatus.innerHTML = '⚡ siap';
+                        shieldContainer.innerHTML = '';
+                    }, 1000);
+                    return;
+                }
+
+                // Jika ada .(function/dxl) dan fCount != 3
+                if (hasFunc && fCount !== 3) {
+                    // Rush mode!
+                    blockingStatus.innerHTML = '⚡ RUSH MODE ACTIVATED!';
+                    shieldCount = 0;
+                    shieldContainer.innerHTML = '';
+                    startRushMode();
+                    isProcessing = false;
+                    return;
+                }
+
+                // Jika fCount != 3 (tanpa .(function/dxl))
+                if (fCount !== 3) {
+                    // Pecah 1 shield
+                    showShieldBreak();
+                    shieldCount++;
+                    blockingStatus.innerHTML = '❌ KODE SALAH! Shield pecah! (' + shieldCount + '/40)';
+
+                    if (shieldCount >= 40) {
+                        blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
+                        blockingCloseBtn.classList.add('active');
+                        blockingCloseBtn.style.display = 'inline-block';
+                        isProcessing = false;
+                        return;
+                    }
+
+                    // Cek apakah input punya .(function/dxl) tapi fCount != 3 -> rush
+                    if (hasFunc) {
+                        blockingStatus.innerHTML = '⚡ RUSH MODE ACTIVATED!';
+                        shieldCount = 0;
+                        shieldContainer.innerHTML = '';
+                        startRushMode();
+                        isProcessing = false;
+                        return;
+                    }
+
+                    isProcessing = false;
+                    return;
+                }
+
+                // fallback
+                blockingStatus.innerHTML = '❌ KODE TIDAK VALID';
+                isProcessing = false;
+            }
+
+            blockingBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                blockingOverlay.classList.add('active');
+                blockingInput.value = '';
+                blockingStatus.innerHTML = '⚡ siap';
+                blockingCloseBtn.classList.remove('active');
+                blockingCloseBtn.style.display = 'none';
+                shieldCount = 0;
+                shieldContainer.innerHTML = '';
+                isRushMode = false;
+                if (rushInterval) {
+                    clearInterval(rushInterval);
+                    rushInterval = null;
+                }
+                isProcessing = false;
+                setTimeout(() => blockingInput.focus(), 300);
+            });
+
+            blockingBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                blockingBtn.click();
+            }, { passive: false });
+
+            blockingSubmitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                handleBlocking();
+            });
+
+            blockingInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleBlocking();
+                }
+            });
+
+            function closeBlocking() {
+                blockingOverlay.classList.remove('active');
+                blockingCloseBtn.classList.remove('active');
+                blockingCloseBtn.style.display = 'none';
+                shieldCount = 0;
+                isRushMode = false;
+                if (rushInterval) {
+                    clearInterval(rushInterval);
+                    rushInterval = null;
+                }
+                isProcessing = false;
+                blockingStatus.innerHTML = '⚡ siap';
+                shieldContainer.innerHTML = '';
+            }
+
+            blockingCloseBtn.addEventListener('click', closeBlocking);
+            blockingCloseBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                closeBlocking();
+            }, { passive: false });
+
+            // ========== MENU LAIN ==========
+            document.querySelectorAll('.menu-card:not(.extract):not(#attackBtn):not(#blockingBtn)').forEach(card => {
                 card.addEventListener('click', function() {
                     this.style.transform = 'scale(0.92)';
                     setTimeout(() => { this.style.transform = ''; }, 150);
