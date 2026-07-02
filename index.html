@@ -12,7 +12,6 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', 'Courier New', monospace;
         }
-
         body {
             min-height: 100vh;
             background: radial-gradient(circle at 20% 30%, #0a0f1e, #020408);
@@ -22,7 +21,6 @@
             padding: 16px;
             overflow-x: hidden;
         }
-
         .cyber-terminal {
             max-width: 500px;
             width: 100%;
@@ -37,7 +35,6 @@
             overflow: hidden;
             z-index: 10;
         }
-
         .screen {
             display: flex;
             flex-direction: column;
@@ -47,7 +44,6 @@
             justify-content: center;
             transition: opacity 0.6s ease;
         }
-
         #loginScreen {
             display: flex;
             flex-direction: column;
@@ -55,7 +51,6 @@
             gap: 24px;
             width: 100%;
         }
-
         .finger-icon {
             font-size: 82px;
             color: #6bcbff;
@@ -68,13 +63,11 @@
             background: rgba(0, 150, 255, 0.05);
             border: 1px solid rgba(100, 200, 255, 0.2);
         }
-
         .finger-icon:active {
             transform: scale(0.92);
             color: #a3e0ff;
             text-shadow: 0 0 45px #0088ff, 0 0 90px #0044ff;
         }
-
         .scan-hint {
             color: #88ccff;
             font-size: 14px;
@@ -87,19 +80,16 @@
             font-weight: 300;
             text-transform: uppercase;
         }
-
         .scan-hint i {
             margin-right: 10px;
             color: #4fc3ff;
         }
-
         .fingerprint-glow {
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .blue-wave {
             position: absolute;
             width: 130px;
@@ -111,17 +101,14 @@
             transition: opacity 0.1s;
             animation: none;
         }
-
         .blue-wave.active {
             opacity: 1;
             animation: pulseBlue 1.2s ease-out forwards;
         }
-
         @keyframes pulseBlue {
             0% { transform: scale(0.6); opacity: 0.8; }
             100% { transform: scale(6); opacity: 0; }
         }
-
         .blue-splash {
             position: fixed;
             top: 0;
@@ -134,18 +121,15 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-
         .blue-splash.active {
             opacity: 1;
             animation: splashSpread 1s ease-out forwards;
         }
-
         @keyframes splashSpread {
             0% { opacity: 0; transform: scale(0.2); }
             40% { opacity: 1; }
             100% { opacity: 0; transform: scale(2.5); }
         }
-
         .hello-master {
             display: none;
             flex-direction: column;
@@ -154,12 +138,10 @@
             animation: fadeGlow 0.8s ease;
             width: 100%;
         }
-
         @keyframes fadeGlow {
             0% { opacity: 0; text-shadow: 0 0 0 #00a6ff; }
             100% { opacity: 1; text-shadow: 0 0 40px #0088ff, 0 0 80px #0044ff; }
         }
-
         .hello-master h1 {
             font-size: 38px;
             font-weight: 600;
@@ -172,7 +154,6 @@
             background-clip: text;
             filter: drop-shadow(0 0 25px #0077ff55);
         }
-
         .continue-btn {
             background: transparent;
             border: 1.5px solid #2ac3ff;
@@ -192,17 +173,14 @@
             align-items: center;
             gap: 14px;
         }
-
         .continue-btn i {
             font-size: 20px;
         }
-
         .continue-btn:active {
             transform: scale(0.94);
             background: rgba(0, 200, 255, 0.2);
             box-shadow: 0 0 45px #0088ff;
         }
-
         #menuScreen {
             display: none;
             flex-direction: column;
@@ -210,19 +188,16 @@
             width: 100%;
             animation: menuSlide 0.5s ease;
         }
-
         @keyframes menuSlide {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
             width: 100%;
         }
-
         .menu-card {
             background: rgba(0, 30, 60, 0.4);
             backdrop-filter: blur(6px);
@@ -240,40 +215,34 @@
             gap: 6px;
             position: relative;
         }
-
         .menu-card i {
             font-size: 34px;
             color: #3ebdff;
             text-shadow: 0 0 20px #0088ff77;
             margin-bottom: 4px;
         }
-
         .menu-card span {
             font-size: 18px;
             font-weight: 500;
             letter-spacing: 2px;
             color: #b3e4ff;
         }
-
         .menu-card small {
             font-size: 11px;
             color: #6d9bb0;
             letter-spacing: 1px;
             opacity: 0.7;
         }
-
         .menu-card:active {
             transform: scale(0.94);
             background: rgba(0, 150, 255, 0.15);
             border-color: #3ebdff;
             box-shadow: 0 0 30px #0088ff55;
         }
-
         .menu-card.attack { border-left: 4px solid #ff5e7c; }
         .menu-card.blocking { border-left: 4px solid #ffb347; }
         .menu-card.bugging { border-left: 4px solid #6fcf97; }
         .menu-card.extract { border-left: 4px solid #bb86fc; }
-
         .menu-footer {
             margin-top: 8px;
             font-size: 12px;
@@ -284,12 +253,10 @@
             text-align: center;
             width: 100%;
         }
-
         .menu-footer i {
             color: #3ebdff;
             margin: 0 4px;
         }
-
         .glow-ring {
             position: absolute;
             border-radius: 50%;
@@ -300,21 +267,20 @@
             pointer-events: none;
             opacity: 0.5;
         }
-
         @keyframes spinRing {
             0% { transform: rotate(0deg) scale(1); opacity: 0.2; }
             50% { opacity: 0.8; }
             100% { transform: rotate(360deg) scale(1.1); opacity: 0.2; }
         }
 
-        /* ===== BLOCKING / DEFENDER ===== */
+        /* ===== BLOCKING (DEFENDER) ===== */
         #blockingOverlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 10, 25, 0.92);
+            background: rgba(0, 10, 25, 0.95);
             backdrop-filter: blur(12px);
             display: none;
             justify-content: center;
@@ -324,71 +290,61 @@
             gap: 20px;
             padding: 30px;
         }
-
         #blockingOverlay.active {
             display: flex;
-            animation: fadeInOverlay 0.3s ease;
+            animation: fadeIn 0.3s ease;
         }
-
-        @keyframes fadeInOverlay {
+        @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
-
         .blocking-box {
-            background: rgba(8, 20, 45, 0.9);
-            border: 1px solid #ffb347;
+            background: rgba(8, 20, 45, 0.95);
+            border: 1.5px solid #ffb347;
             border-radius: 30px;
             padding: 35px 25px;
             max-width: 420px;
             width: 100%;
             text-align: center;
             box-shadow: 0 0 60px #ffb34722;
-            position: relative;
         }
-
         .blocking-box h2 {
             color: #ffb347;
-            font-size: 22px;
+            font-size: 24px;
             letter-spacing: 3px;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             text-shadow: 0 0 20px #ffb34755;
         }
-
         .blocking-box .sub {
             color: #d48c3a;
-            font-size: 13px;
+            font-size: 14px;
             margin-bottom: 20px;
             letter-spacing: 1px;
             opacity: 0.8;
         }
-
         .blocking-input {
             width: 100%;
             padding: 14px 18px;
-            background: rgba(0, 20, 40, 0.7);
+            background: rgba(0, 20, 40, 0.8);
             border: 1.5px solid #ffb34766;
             border-radius: 16px;
             color: #ffd7a0;
-            font-size: 18px;
+            font-size: 20px;
             font-family: 'Courier New', monospace;
             text-align: center;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             outline: none;
             transition: 0.2s;
         }
-
         .blocking-input:focus {
             border-color: #ffb347;
             box-shadow: 0 0 30px #ffb34733;
         }
-
         .blocking-input::placeholder {
             color: #5a4a3a;
             font-size: 14px;
             letter-spacing: 1px;
         }
-
         .blocking-btn {
             margin-top: 16px;
             background: transparent;
@@ -403,22 +359,19 @@
             background: rgba(255, 179, 71, 0.05);
             width: 100%;
         }
-
         .blocking-btn:active {
             transform: scale(0.94);
             background: rgba(255, 179, 71, 0.15);
         }
-
         .blocking-status {
             margin-top: 16px;
             color: #d48c3a;
-            font-size: 14px;
+            font-size: 15px;
             letter-spacing: 1px;
-            min-height: 30px;
+            min-height: 50px;
             font-family: 'Courier New', monospace;
+            line-height: 1.6;
         }
-
-        /* Shield Break Animation */
         .shield-break-container {
             position: fixed;
             top: 0;
@@ -431,7 +384,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .shield-icon {
             font-size: 80px;
             color: #ffb347;
@@ -439,43 +391,24 @@
             animation: shieldBreak 0.6s ease forwards;
             position: absolute;
         }
-
         @keyframes shieldBreak {
             0% { transform: scale(0.5) rotate(0deg); opacity: 1; }
             50% { transform: scale(1.5) rotate(20deg); opacity: 1; }
             100% { transform: scale(2) rotate(45deg); opacity: 0; }
         }
-
-        .rush-text {
-            color: #ff6b6b;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            animation: pulseRush 0.5s ease infinite alternate;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 30px #ff6b6b55;
-        }
-
-        @keyframes pulseRush {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.05); }
-        }
-
         .rush-final {
             color: #ff0000;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
             letter-spacing: 4px;
             text-shadow: 0 0 40px #ff0000, 0 0 80px #ff000066;
             animation: finalPulse 0.3s ease infinite alternate;
             font-family: 'Courier New', monospace;
         }
-
         @keyframes finalPulse {
             0% { transform: scale(1); text-shadow: 0 0 40px #ff0000; }
-            100% { transform: scale(1.1); text-shadow: 0 0 80px #ff0000, 0 0 120px #ff000044; }
+            100% { transform: scale(1.05); text-shadow: 0 0 80px #ff0000, 0 0 120px #ff000044; }
         }
-
         .blocking-close-btn {
             margin-top: 16px;
             background: transparent;
@@ -489,12 +422,11 @@
             letter-spacing: 2px;
             background: rgba(255, 179, 71, 0.05);
             display: none;
+            width: 100%;
         }
-
         .blocking-close-btn.active {
             display: inline-block;
         }
-
         .blocking-close-btn:active {
             transform: scale(0.94);
             background: rgba(255, 179, 71, 0.15);
@@ -517,12 +449,10 @@
             gap: 30px;
             padding: 30px;
         }
-
         .extract-overlay.active {
             display: flex;
-            animation: fadeInOverlay 0.3s ease;
+            animation: fadeIn 0.3s ease;
         }
-
         .extract-box {
             background: rgba(8, 20, 45, 0.9);
             border: 1px solid #bb86fc;
@@ -533,7 +463,6 @@
             text-align: center;
             box-shadow: 0 0 60px #bb86fc33;
         }
-
         .extract-box h2 {
             color: #bb86fc;
             font-size: 22px;
@@ -541,7 +470,6 @@
             margin-bottom: 20px;
             text-shadow: 0 0 20px #bb86fc55;
         }
-
         .progress-container {
             width: 100%;
             height: 14px;
@@ -551,7 +479,6 @@
             margin: 16px 0;
             border: 1px solid #bb86fc44;
         }
-
         .progress-bar {
             width: 0%;
             height: 100%;
@@ -561,12 +488,10 @@
             transition: width 0.1s linear;
             animation: shimmer 0.6s linear infinite;
         }
-
         @keyframes shimmer {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-
         .progress-text {
             color: #a78cd6;
             font-size: 28px;
@@ -575,7 +500,6 @@
             font-family: 'Courier New', monospace;
             text-shadow: 0 0 20px #bb86fc44;
         }
-
         .extract-success {
             display: none;
             color: #6fcf97;
@@ -586,17 +510,14 @@
             text-shadow: 0 0 30px #6fcf9755;
             animation: successPulse 0.8s ease;
         }
-
         .extract-success.active {
             display: block;
         }
-
         @keyframes successPulse {
             0% { transform: scale(0.8); opacity: 0; }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); opacity: 1; }
         }
-
         .extract-close-btn {
             margin-top: 24px;
             background: transparent;
@@ -610,7 +531,6 @@
             letter-spacing: 2px;
             background: rgba(187, 134, 252, 0.05);
         }
-
         .extract-close-btn:active {
             transform: scale(0.94);
             background: rgba(187, 134, 252, 0.15);
@@ -630,11 +550,9 @@
             align-items: center;
             flex-direction: column;
         }
-
         #attackOverlay.active {
             display: flex;
         }
-
         #attackCanvas {
             position: absolute;
             top: 0;
@@ -643,7 +561,6 @@
             height: 100%;
             display: block;
         }
-
         .attack-success {
             position: relative;
             z-index: 10;
@@ -660,18 +577,15 @@
             border: 2px solid #00ff4166;
             display: none;
         }
-
         .attack-success.active {
             display: block;
             animation: attackSuccessPulse 0.5s ease;
         }
-
         @keyframes attackSuccessPulse {
             0% { transform: scale(0.5); opacity: 0; }
             50% { transform: scale(1.2); }
             100% { transform: scale(1); opacity: 1; }
         }
-
         .attack-close-btn {
             position: relative;
             z-index: 10;
@@ -688,16 +602,13 @@
             background: rgba(0, 255, 65, 0.05);
             display: none;
         }
-
         .attack-close-btn.active {
             display: block;
         }
-
         .attack-close-btn:active {
             transform: scale(0.94);
             background: rgba(0, 255, 65, 0.15);
         }
-
         @media (max-width: 430px) {
             .cyber-terminal { padding: 20px 12px; }
             .hello-master h1 { font-size: 28px; letter-spacing: 4px; }
@@ -853,12 +764,9 @@
             let isLoggedIn = false;
             let isExtracting = false;
             let isAttacking = false;
-            let isBlockingActive = false;
-            let animationId = null;
             let shieldCount = 0;
             let isRushMode = false;
             let rushInterval = null;
-            let rushCount = 0;
             let isProcessing = false;
 
             // ========== SPLASH ==========
@@ -1098,27 +1006,6 @@
                 }, 800);
             }
 
-            function triggerShieldBreak(count) {
-                for (let i = 0; i < count; i++) {
-                    setTimeout(() => {
-                        showShieldBreak();
-                        shieldCount++;
-                        updateRushStatus();
-
-                        if (shieldCount >= 40) {
-                            // FINAL
-                            clearInterval(rushInterval);
-                            rushInterval = null;
-                            isRushMode = false;
-                            blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
-                            blockingCloseBtn.classList.add('active');
-                            blockingCloseBtn.style.display = 'inline-block';
-                            isProcessing = false;
-                        }
-                    }, i * 200); // default 200ms, akan di-override oleh rush
-                }
-            }
-
             function updateRushStatus() {
                 if (shieldCount < 40) {
                     let msg = '⏳ RUSHING IS ON GOING, PLS CALM DOWN<br>';
@@ -1129,20 +1016,25 @@
 
             function startRushMode() {
                 isRushMode = true;
-                let speed = 200; // ms per break
-                let counter = 0;
+                let speed = 200;
+                shieldCount = 0;
+                shieldContainer.innerHTML = '';
 
                 if (rushInterval) clearInterval(rushInterval);
 
-                rushInterval = setInterval(() => {
+                function doRush() {
                     if (shieldCount >= 40) {
                         clearInterval(rushInterval);
                         rushInterval = null;
                         isRushMode = false;
+                        blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
+                        blockingCloseBtn.classList.add('active');
+                        blockingCloseBtn.style.display = 'inline-block';
+                        isProcessing = false;
                         return;
                     }
 
-                    // Pecah 3 shield sekaligus
+                    // 3 shield sekaligus
                     for (let i = 0; i < 3; i++) {
                         setTimeout(() => {
                             if (shieldCount >= 40) return;
@@ -1162,46 +1054,11 @@
                         }, i * 100);
                     }
 
-                    // Percepat terus (speed makin kecil)
-                    if (speed > 50) {
-                        speed -= 5;
-                    }
-                    counter++;
+                    // Percepat
+                    if (speed > 50) speed -= 5;
+                }
 
-                    // Reset interval dengan speed baru
-                    if (rushInterval) {
-                        clearInterval(rushInterval);
-                        rushInterval = setInterval(() => {
-                            // Re-run logic
-                            if (shieldCount >= 40) {
-                                clearInterval(rushInterval);
-                                rushInterval = null;
-                                isRushMode = false;
-                                return;
-                            }
-                            for (let i = 0; i < 3; i++) {
-                                setTimeout(() => {
-                                    if (shieldCount >= 40) return;
-                                    showShieldBreak();
-                                    shieldCount++;
-                                    updateRushStatus();
-                                    if (shieldCount >= 40) {
-                                        clearInterval(rushInterval);
-                                        rushInterval = null;
-                                        isRushMode = false;
-                                        blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
-                                        blockingCloseBtn.classList.add('active');
-                                        blockingCloseBtn.style.display = 'inline-block';
-                                        isProcessing = false;
-                                    }
-                                }, i * 100);
-                            }
-                            if (speed > 50) {
-                                speed -= 5;
-                            }
-                        }, speed);
-                    }
-                }, speed);
+                rushInterval = setInterval(doRush, speed);
             }
 
             function handleBlocking() {
@@ -1211,13 +1068,10 @@
                 const input = blockingInput.value.trim();
                 blockingInput.value = '';
 
-                // Cek apakah input mengandung .(function/dxl)
                 const hasFunc = input.includes('.(function/dxl)');
-
-                // Hitung jumlah huruf 'f'
                 const fCount = (input.match(/f/g) || []).length;
 
-                // Kondisi sukses: fff.bench
+                // SUCCESS
                 if (input === 'fff.bench') {
                     blockingStatus.innerHTML = '✅ ACCESS GRANTED!';
                     setTimeout(() => {
@@ -1237,9 +1091,8 @@
                     return;
                 }
 
-                // Jika ada .(function/dxl) dan fCount != 3
+                // RUSH MODE
                 if (hasFunc && fCount !== 3) {
-                    // Rush mode!
                     blockingStatus.innerHTML = '⚡ RUSH MODE ACTIVATED!';
                     shieldCount = 0;
                     shieldContainer.innerHTML = '';
@@ -1248,9 +1101,8 @@
                     return;
                 }
 
-                // Jika fCount != 3 (tanpa .(function/dxl))
+                // SHIELD PECAH 1X
                 if (fCount !== 3) {
-                    // Pecah 1 shield
                     showShieldBreak();
                     shieldCount++;
                     blockingStatus.innerHTML = '❌ KODE SALAH! Shield pecah! (' + shieldCount + '/40)';
@@ -1263,7 +1115,6 @@
                         return;
                     }
 
-                    // Cek apakah input punya .(function/dxl) tapi fCount != 3 -> rush
                     if (hasFunc) {
                         blockingStatus.innerHTML = '⚡ RUSH MODE ACTIVATED!';
                         shieldCount = 0;
@@ -1277,11 +1128,11 @@
                     return;
                 }
 
-                // fallback
                 blockingStatus.innerHTML = '❌ KODE TIDAK VALID';
                 isProcessing = false;
             }
 
+            // EVENT BLOCKING
             blockingBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 blockingOverlay.classList.add('active');
