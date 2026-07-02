@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🔮 CYBER DECK · MASTER</title>
+    <!-- Font & Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Courier New', monospace;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #0a0f1e, #020408);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        /* Terminal utama */
+        .cyber-terminal {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(8, 16, 30, 0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            border-radius: 40px;
+            padding: 24px 20px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 180, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* layar utama */
+        .screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            min-height: 420px;
+            justify-content: center;
+            transition: opacity 0.6s ease;
+        }
+
+        /* ===== LOGIN FINGER ===== */
+        #loginScreen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+        }
+
+        .finger-icon {
+            font-size: 82px;
+            color: #6bcbff;
+            text-shadow: 0 0 25px #00a6ff, 0 0 60px #0044ff88;
+            transition: 0.2s;
+            cursor: pointer;
+            user-select: none;
+            padding: 16px;
+            border-radius: 80px;
+            background: rgba(0, 150, 255, 0.05);
+            border: 1px solid rgba(100, 200, 255, 0.2);
+        }
+
+        .finger-icon:active {
+            transform: scale(0.92);
+            color: #a3e0ff;
+            text-shadow: 0 0 45px #0088ff, 0 0 90px #0044ff;
+        }
+
+        .scan-hint {
+            color: #88ccff;
+            font-size: 14px;
+            letter-spacing: 2px;
+            background: rgba(0, 255, 255, 0.04);
+            padding: 12px 24px;
+            border-radius: 60px;
+            border: 1px dashed rgba(0, 200, 255, 0.3);
+            backdrop-filter: blur(4px);
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        .scan-hint i {
+            margin-right: 10px;
+            color: #4fc3ff;
+        }
+
+        /* efek sidik jari biru (scan overlay) */
+        .fingerprint-glow {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .blue-wave {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 150, 255, 0.5) 0%, rgba(0, 100, 255, 0) 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.1s;
+            animation: none;
+        }
+
+        .blue-wave.active {
+            opacity: 1;
+            animation: pulseBlue 1.2s ease-out forwards;
+        }
+
+        @keyframes pulseBlue {
+            0% { transform: scale(0.6); opacity: 0.8; }
+            100% { transform: scale(6); opacity: 0; }
+        }
+
+        /* splash biru full layar (efek menyebar) */
+        .blue-splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, #0099ff55 0%, #001aff33 40%, #000814 90%);
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .blue-splash.active {
+            opacity: 1;
+            animation: splashSpread 1s ease-out forwards;
+        }
+
+        @keyframes splashSpread {
+            0% { opacity: 0; transform: scale(0.2); }
+            40% { opacity: 1; }
+            100% { opacity: 0; transform: scale(2.5); }
+        }
+
+        /* HELLO MASTER */
+        .hello-master {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            animation: fadeGlow 0.8s ease;
+            width: 100%;
+        }
+
+        @keyframes fadeGlow {
+            0% { opacity: 0; text-shadow: 0 0 0 #00a6ff; }
+            100% { opacity: 1; text-shadow: 0 0 40px #0088ff, 0 0 80px #0044ff; }
+        }
+
+        .hello-master h1 {
+            font-size: 38px;
+            font-weight: 600;
+            letter-spacing: 6px;
+            color: #b3f0ff;
+            text-shadow: 0 0 30px #0099ff, 0 0 60px #0044ff;
+            background: linear-gradient(135deg, #b3f0ff, #4dabff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 25px #0077ff55);
+        }
+
+        .continue-btn {
+            background: transparent;
+            border: 1.5px solid #2ac3ff;
+            color: #b3f0ff;
+            padding: 14px 44px;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            backdrop-filter: blur(4px);
+            background: rgba(0, 150, 255, 0.08);
+            box-shadow: 0 0 20px #0077ff33;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .continue-btn i {
+            font-size: 20px;
+        }
+
+        .continue-btn:active {
+            transform: scale(0.94);
+            background: rgba(0, 200, 255, 0.2);
+            box-shadow: 0 0 45px #0088ff;
+        }
+
+        /* ===== MENU HACKER ===== */
+        #menuScreen {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            animation: menuSlide 0.5s ease;
+        }
+
+        @keyframes menuSlide {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .menu-card {
+            background: rgba(0, 30, 60, 0.4);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            border-radius: 30px;
+            padding: 22px 6px;
+            text-align: center;
+            color: #ccf0ff;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+            transition: 0.15s ease;
+            cursor: default;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .menu-card i {
+            font-size: 34px;
+            color: #3ebdff;
+            text-shadow: 0 0 20px #0088ff77;
+            margin-bottom: 4px;
+        }
+
+        .menu-card span {
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: #b3e4ff;
+        }
+
+        .menu-card small {
+            font-size: 11px;
+            color: #6d9bb0;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .menu-card:active {
+            transform: scale(0.94);
+            background: rgba(0, 150, 255, 0.15);
+            border-color: #3ebdff;
+            box-shadow: 0 0 30px #0088ff55;
+        }
+
+        .menu-card.attack { border-left: 4px solid #ff5e7c; }
+        .menu-card.blocking { border-left: 4px solid #ffb347; }
+        .menu-card.bugging { border-left: 4px solid #6fcf97; }
+        .menu-card.extract { border-left: 4px solid #bb86fc; }
+
+        .menu-footer {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #3d7f9e;
+            letter-spacing: 2px;
+            border-top: 1px solid rgba(0, 200, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .menu-footer i {
+            color: #3ebdff;
+            margin: 0 4px;
+        }
+
+        /* status */
+        .status-light {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 11px;
+            color: #4c8aa3;
+            margin-bottom: 6px;
+        }
+
+        .status-light i {
+            color: #3ebdff;
+        }
+
+        /* responsif */
+        @media (max-width: 430px) {
+            .cyber-terminal { padding: 20px 12px; }
+            .hello-master h1 { font-size: 28px; letter-spacing: 4px; }
+            .menu-card i { font-size: 28px; }
+            .menu-card span { font-size: 16px; }
+        }
+
+        /* hide scanner */
+        .hidden {
+            display: none !important;
+        }
+
+        .fingerprint-glow {
+            position: relative;
+        }
+
+        .glow-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid #0099ff33;
+            width: 110px;
+            height: 110px;
+            animation: spinRing 6s linear infinite;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        @keyframes spinRing {
+            0% { transform: rotate(0deg) scale(1); opacity: 0.2; }
+            50% { opacity: 0.8; }
+            100% { transform: rotate(360deg) scale(1.1); opacity: 0.2; }
+        }
+    </style>
+</head>
+<body>
+    <!-- SPLASH BIRU (efek menyebar ke seluruh layar) -->
+    <div id="blueSplash" class="blue-splash"></div>
+
+    <div class="cyber-terminal">
+        <!-- LOGIN SCREEN (sidik jari) -->
+        <div id="loginScreen" class="screen">
+            <div class="fingerprint-glow">
+                <div class="glow-ring"></div>
+                <div id="blueWave" class="blue-wave"></div>
+                <div id="fingerIcon" class="finger-icon">
+                    <i class="fas fa-fingerprint"></i>
+                </div>
+            </div>
+            <div class="scan-hint">
+                <i class="fas fa-scan"></i> TEKAN SIDIK JARI
+            </div>
+            <div style="color: #397e9e; font-size: 12px; letter-spacing: 1px; background: #00162255; padding: 6px 20px; border-radius: 40px;">
+                <i class="fas fa-shield-alt" style="margin-right: 8px;"></i> biometrik terenkripsi
+            </div>
+        </div>
+
+        <!-- HELLO MASTER (setelah sidik) -->
+        <div id="helloMaster" class="hello-master screen">
+            <h1>⚡ HELLO MASTER</h1>
+            <button id="continueBtn" class="continue-btn">
+                <i class="fas fa-arrow-right"></i> CONTINUE
+            </button>
+        </div>
+
+        <!-- MENU UTAMA HACKER -->
+        <div id="menuScreen" class="screen">
+            <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; padding: 0 6px;">
+                <span style="color: #82c2e0; font-size: 13px; letter-spacing: 2px;">
+                    <i class="fas fa-terminal" style="margin-right: 6px;"></i>ROOT
+                </span>
+                <span style="color: #3d7f9e; font-size: 11px;">
+                    <i class="fas fa-circle" style="color: #00ff88; font-size: 8px;"></i> ONLINE
+                </span>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card attack">
+                    <i class="fas fa-skull-crossbones"></i>
+                    <span>ATTACK</span>
+                    <small>#exploit</small>
+                </div>
+                <div class="menu-card blocking">
+                    <i class="fas fa-shield-halved"></i>
+                    <span>BLOCKING</span>
+                    <small>#firewall</small>
+                </div>
+                <div class="menu-card bugging">
+                    <i class="fas fa-bug"></i>
+                    <span>BUGGING</span>
+                    <small>#spy</small>
+                </div>
+                <div class="menu-card extract">
+                    <i class="fas fa-database"></i>
+                    <span>EXTRACT</span>
+                    <small>#dump</small>
+                </div>
+            </div>
+            <div class="menu-footer">
+                <i class="fas fa-lock"></i>  SESSION: MASTER  <i class="fas fa-circle" style="color: #3ebdff; font-size: 6px; margin: 0 6px;"></i>  0x7F
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            "use strict";
+
+            const loginScreen = document.getElementById('loginScreen');
+            const helloMaster = document.getElementById('helloMaster');
+            const menuScreen = document.getElementById('menuScreen');
+            const fingerIcon = document.getElementById('fingerIcon');
+            const blueWave = document.getElementById('blueWave');
+            const blueSplash = document.getElementById('blueSplash');
+            const continueBtn = document.getElementById('continueBtn');
+
+            // state
+            let isLoggedIn = false;
+
+            // fungsi reset splash
+            function triggerBlueSplash() {
+                // reset animasi
+                blueSplash.classList.remove('active');
+                // force reflow
+                void blueSplash.offsetWidth;
+                blueSplash.classList.add('active');
+                // hilangin setelah animasi selesai
+                setTimeout(() => {
+                    blueSplash.classList.remove('active');
+                }, 1200);
+            }
+
+            // fungsi pindah ke HELLO MASTER
+            function showHelloMaster() {
+                // sembunyikan login
+                loginScreen.style.display = 'none';
+                // tampilkan hello master
+                helloMaster.style.display = 'flex';
+                // efek suara? (tapi kita pakai visual)
+                // reset animasi hello
+                helloMaster.style.animation = 'none';
+                void helloMaster.offsetWidth;
+                helloMaster.style.animation = 'fadeGlow 0.8s ease';
+            }
+
+            // fungsi lanjut ke menu
+            function showMenu() {
+                helloMaster.style.display = 'none';
+                menuScreen.style.display = 'flex';
+                // reset animasi menu
+                menuScreen.style.animation = 'none';
+                void menuScreen.offsetWidth;
+                menuScreen.style.animation = 'menuSlide 0.5s ease';
+            }
+
+            // ---- PROSES SCAN FINGER ----
+            function handleFingerScan() {
+                if (isLoggedIn) return;
+
+                // 1. efek gelombang biru lokal (di sekitar sidik)
+                blueWave.classList.remove('active');
+                void blueWave.offsetWidth;
+                blueWave.classList.add('active');
+
+                // 2. efek splash besar (menyebar ke seluruh layar)
+                triggerBlueSplash();
+
+                // 3. setelah animasi splash & wave, pindah ke HELLO MASTER
+                //    waktu delay cocok dengan durasi animasi splash (1.2s)
+                setTimeout(() => {
+                    // pastikan belum login
+                    if (!isLoggedIn) {
+                        isLoggedIn = true;
+                        showHelloMaster();
+                    }
+                }, 1000); // sedikit sebelum splash selesai agar mulus
+            }
+
+            // event listener finger (klik)
+            fingerIcon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                handleFingerScan();
+            });
+
+            // sentuhan juga (mobile)
+            fingerIcon.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                handleFingerScan();
+            }, { passive: false });
+
+            // continue button -> masuk menu
+            continueBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (isLoggedIn) {
+                    showMenu();
+                }
+            });
+
+            continueBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    showMenu();
+                }
+            }, { passive: false });
+
+            // efek tambahan: card menu diberi sentuhan interaktif (hanya visual)
+            document.querySelectorAll('.menu-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // efek getar kecil
+                    this.style.transform = 'scale(0.92)';
+                    setTimeout(() => { this.style.transform = ''; }, 150);
+                    // notifikasi kecil (hanya mainan)
+                    const label = this.querySelector('span')?.innerText || 'command';
+                    const originalText = this.querySelector('small')?.innerText || '';
+                    const smallEl = this.querySelector('small');
+                    if (smallEl) {
+                        smallEl.innerText = '✓ executing';
+                        setTimeout(() => { smallEl.innerText = originalText; }, 600);
+                    }
+                });
+            });
+
+            // reset jika ada error (tapi kita biarkan)
+            console.log('🔮 CYBER DECK · MASTER siap.');
+        })();
+    </script>
+</body>
+</html>
