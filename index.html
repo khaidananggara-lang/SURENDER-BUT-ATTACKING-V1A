@@ -6,7 +6,12 @@
     <title>🔮 CYBER DECK</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
         body {
             min-height: 100vh;
             background: radial-gradient(circle at 20% 30%, #0a0f1e, #020408);
@@ -36,7 +41,13 @@
             min-height: 420px;
             justify-content: center;
         }
-        #loginScreen { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; }
+        #loginScreen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+        }
         .finger-icon {
             font-size: 82px;
             color: #6bcbff;
@@ -47,7 +58,9 @@
             background: rgba(0, 150, 255, 0.05);
             border: 1px solid rgba(100, 200, 255, 0.2);
         }
-        .finger-icon:active { transform: scale(0.92); }
+        .finger-icon:active {
+            transform: scale(0.92);
+        }
         .scan-hint {
             color: #88ccff;
             font-size: 14px;
@@ -71,8 +84,14 @@
             animation: pulseBlue 1.2s ease-out forwards;
         }
         @keyframes pulseBlue {
-            0% { transform: scale(0.6); opacity: 0.8; }
-            100% { transform: scale(6); opacity: 0; }
+            0% {
+                transform: scale(0.6);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(6);
+                opacity: 0;
+            }
         }
         .blue-splash {
             position: fixed;
@@ -90,9 +109,17 @@
             animation: splashSpread 1s ease-out forwards;
         }
         @keyframes splashSpread {
-            0% { opacity: 0; transform: scale(0.2); }
-            40% { opacity: 1; }
-            100% { opacity: 0; transform: scale(2.5); }
+            0% {
+                opacity: 0;
+                transform: scale(0.2);
+            }
+            40% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2.5);
+            }
         }
         .hello-master {
             display: none;
@@ -126,7 +153,9 @@
             align-items: center;
             gap: 14px;
         }
-        .continue-btn:active { transform: scale(0.94); }
+        .continue-btn:active {
+            transform: scale(0.94);
+        }
         #menuScreen {
             display: none;
             flex-direction: column;
@@ -149,14 +178,39 @@
             color: #ccf0ff;
             cursor: pointer;
         }
-        .menu-card i { font-size: 34px; color: #3ebdff; text-shadow: 0 0 20px #0088ff77; }
-        .menu-card span { font-size: 18px; font-weight: 500; letter-spacing: 2px; display: block; margin-top: 4px; }
-        .menu-card small { font-size: 11px; color: #6d9bb0; display: block; margin-top: 2px; }
-        .menu-card:active { transform: scale(0.94); }
-        .menu-card.attack { border-left: 4px solid #ff5e7c; }
-        .menu-card.blocking { border-left: 4px solid #ffb347; }
-        .menu-card.bugging { border-left: 4px solid #6fcf97; }
-        .menu-card.extract { border-left: 4px solid #bb86fc; }
+        .menu-card i {
+            font-size: 34px;
+            color: #3ebdff;
+            text-shadow: 0 0 20px #0088ff77;
+        }
+        .menu-card span {
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            display: block;
+            margin-top: 4px;
+        }
+        .menu-card small {
+            font-size: 11px;
+            color: #6d9bb0;
+            display: block;
+            margin-top: 2px;
+        }
+        .menu-card:active {
+            transform: scale(0.94);
+        }
+        .menu-card.attack {
+            border-left: 4px solid #ff5e7c;
+        }
+        .menu-card.blocking {
+            border-left: 4px solid #ffb347;
+        }
+        .menu-card.bugging {
+            border-left: 4px solid #6fcf97;
+        }
+        .menu-card.extract {
+            border-left: 4px solid #bb86fc;
+        }
         .menu-footer {
             margin-top: 8px;
             font-size: 12px;
@@ -178,98 +232,97 @@
             opacity: 0.5;
         }
         @keyframes spinRing {
-            0% { transform: rotate(0deg) scale(1); opacity: 0.2; }
-            50% { opacity: 0.8; }
-            100% { transform: rotate(360deg) scale(1.1); opacity: 0.2; }
+            0% {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: rotate(360deg) scale(1.1);
+                opacity: 0.2;
+            }
         }
-        .fingerprint-glow { position: relative; display: flex; justify-content: center; align-items: center; }
+        .fingerprint-glow {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-        /* ===== BLOCKING - SHIELD CHARGING ===== */
+        /* ===== BLOCKING ===== */
         #blockingOverlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 10, 25, 0.93);
-            backdrop-filter: blur(14px);
+            background: rgba(0, 10, 25, 0.95);
+            backdrop-filter: blur(12px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
             padding: 30px;
-        }
-        #blockingOverlay.active { display: flex; }
-
-        .shield-charge-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
+            gap: 30px;
         }
-
-        .shield-charge-container svg {
-            width: 200px;
-            height: 200px;
-            transform: rotate(-90deg);
+        #blockingOverlay.active {
+            display: flex;
         }
-
-        .shield-charge-container .bg-circle {
-            fill: none;
-            stroke: #1a2a45;
-            stroke-width: 6;
+        .blocking-finger {
+            font-size: 80px;
+            color: #6bcbff;
+            text-shadow: 0 0 40px #00a6ff, 0 0 80px #0044ff88;
+            animation: fingerPulse 1s ease infinite alternate;
+            z-index: 10;
         }
-
-        .shield-charge-container .progress-circle {
-            fill: none;
-            stroke: #ffb347;
-            stroke-width: 6;
-            stroke-linecap: round;
-            stroke-dasharray: 565.48;
-            stroke-dashoffset: 565.48;
-            transition: stroke-dashoffset 0.1s linear;
-            filter: drop-shadow(0 0 15px #ffb34755);
+        @keyframes fingerPulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
         }
-
-        .shield-icon-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 70px;
+        .blocking-shield-final {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            z-index: 10;
+        }
+        .blocking-shield-final.active {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+        .blocking-shield-final i {
+            font-size: 80px;
             color: #ffb347;
             text-shadow: 0 0 40px #ffb347, 0 0 80px #ffb34755;
         }
-
-        .shield-percent {
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #ffb347;
-            font-size: 28px;
-            font-weight: 700;
+        .blocking-shield-final .dns-text {
+            color: #6fcf97;
+            font-size: 22px;
+            font-weight: 600;
             letter-spacing: 2px;
-            text-shadow: 0 0 30px #ffb34755;
+            text-shadow: 0 0 30px #6fcf9755;
         }
-
-        .shield-status-text {
-            position: absolute;
-            top: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #d48c3a;
-            font-size: 16px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            white-space: nowrap;
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
-
-        .shield-charge-close-btn {
-            margin-top: 80px;
+        .blocking-close-btn {
+            margin-top: 20px;
             background: transparent;
             border: 1px solid #ffb34766;
             color: #ffb347;
@@ -279,65 +332,264 @@
             cursor: pointer;
             letter-spacing: 2px;
             display: none;
+            z-index: 10;
+        }
+        .blocking-close-btn.active {
+            display: inline-block;
+        }
+        .blocking-close-btn:active {
+            transform: scale(0.94);
+        }
+        #blockingCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 1;
         }
 
-        .shield-charge-close-btn.active { display: inline-block; }
-        .shield-charge-close-btn:active { transform: scale(0.94); }
-
-        .shield-charge-text-final {
-            display: none;
-            color: #6fcf97;
-            font-size: 22px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-shadow: 0 0 40px #6fcf9755;
-            animation: successPulse 0.5s ease;
-        }
-        .shield-charge-text-final.active { display: block; }
-
-        @keyframes successPulse {
-            0% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* ===== EXTRACT ===== */
-        .extract-overlay {
+        /* ===== BUGGING ===== */
+        #buggingOverlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 10, 25, 0.85);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 10, 25, 0.93);
+            backdrop-filter: blur(12px);
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 2000;
             padding: 30px;
         }
-        .extract-overlay.active { display: flex; }
-        .extract-box {
-            background: rgba(8, 20, 45, 0.9);
-            border: 1px solid #bb86fc;
+        #buggingOverlay.active {
+            display: flex;
+        }
+        .bugging-box {
+            background: rgba(8, 20, 45, 0.95);
+            border: 1.5px solid #6fcf97;
             border-radius: 30px;
-            padding: 40px 30px;
-            max-width: 380px;
+            padding: 35px 25px;
+            max-width: 420px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 0 60px #bb86fc33;
+            box-shadow: 0 0 60px #6fcf9722;
         }
-        .extract-box h2 { color: #bb86fc; font-size: 22px; letter-spacing: 3px; margin-bottom: 20px; }
-        .progress-container {
+        .bugging-box h2 {
+            color: #6fcf97;
+            font-size: 24px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px #6fcf9755;
+        }
+        .bugging-box .sub {
+            color: #4a9e7a;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .bugging-input {
             width: 100%;
-            height: 14px;
+            padding: 14px 18px;
+            background: rgba(0, 20, 40, 0.8);
+            border: 1.5px solid #6fcf9766;
+            border-radius: 16px;
+            color: #b3f0d0;
+            font-size: 20px;
+            text-align: center;
+            letter-spacing: 2px;
+            outline: none;
+        }
+        .bugging-input:focus {
+            border-color: #6fcf97;
+            box-shadow: 0 0 30px #6fcf9733;
+        }
+        .bugging-btn {
+            margin-top: 16px;
+            background: transparent;
+            border: 1.5px solid #6fcf97;
+            color: #6fcf97;
+            padding: 12px 40px;
+            border-radius: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            width: 100%;
+        }
+        .bugging-btn:active {
+            transform: scale(0.94);
+        }
+        .bugging-result {
+            margin-top: 16px;
+            color: #ff6b6b;
+            font-size: 18px;
+            font-weight: 600;
+            min-height: 40px;
+            text-shadow: 0 0 20px #ff6b6b55;
+        }
+        .bugging-close-btn {
+            margin-top: 16px;
+            background: transparent;
+            border: 1px solid #6fcf9766;
+            color: #6fcf97;
+            padding: 12px 40px;
+            border-radius: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            width: 100%;
+        }
+        .bugging-close-btn:active {
+            transform: scale(0.94);
+        }
+
+        /* ===== EXTRACT ===== */
+        #extractOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 10, 25, 0.93);
+            backdrop-filter: blur(12px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        #extractOverlay.active {
+            display: flex;
+        }
+
+        .extract-box {
+            background: rgba(8, 20, 45, 0.95);
+            border: 1.5px solid #bb86fc;
+            border-radius: 30px;
+            padding: 30px 20px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 60px #bb86fc22;
+            position: relative;
+        }
+        .extract-box .next-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: transparent;
+            border: 1px solid #bb86fc66;
+            color: #bb86fc;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            display: none;
+        }
+        .extract-box .next-btn.active {
+            display: inline-block;
+        }
+        .extract-box .next-btn:active {
+            transform: scale(0.94);
+        }
+        .extract-box h2 {
+            color: #bb86fc;
+            font-size: 22px;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+            text-shadow: 0 0 20px #bb86fc55;
+        }
+        .extract-file-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin: 16px 0;
+        }
+        .extract-file-btn {
+            background: rgba(0, 30, 60, 0.5);
+            border: 1px solid #bb86fc44;
+            border-radius: 16px;
+            padding: 12px 4px;
+            color: #b3d4ff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 0.5px;
+        }
+        .extract-file-btn:active {
+            transform: scale(0.92);
+        }
+        .extract-file-btn.done {
+            border-color: #6fcf97;
+            background: rgba(111, 207, 151, 0.15);
+            color: #6fcf97;
+        }
+        .extract-file-btn.blocked {
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.15);
+            color: #ff6b6b;
+        }
+
+        .extract-ip-section {
+            display: none;
+            margin-top: 12px;
+            gap: 10px;
+            flex-direction: column;
+        }
+        .extract-ip-section.active {
+            display: flex;
+        }
+        .extract-ip-input {
+            padding: 12px 16px;
+            background: rgba(0, 20, 40, 0.8);
+            border: 1.5px solid #bb86fc66;
+            border-radius: 14px;
+            color: #d4bfff;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 2px;
+            outline: none;
+            width: 100%;
+        }
+        .extract-ip-input:focus {
+            border-color: #bb86fc;
+            box-shadow: 0 0 30px #bb86fc33;
+        }
+        .extract-ok-btn {
+            background: transparent;
+            border: 1.5px solid #bb86fc;
+            color: #bb86fc;
+            padding: 10px 30px;
+            border-radius: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            letter-spacing: 2px;
+        }
+        .extract-ok-btn:active {
+            transform: scale(0.94);
+        }
+
+        .extract-progress-section {
+            display: none;
+            margin-top: 16px;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .extract-progress-section.active {
+            display: flex;
+        }
+        .extract-progress-bar-wrap {
+            width: 100%;
+            height: 12px;
             background: #1a2a45;
             border-radius: 30px;
             overflow: hidden;
-            margin: 16px 0;
             border: 1px solid #bb86fc44;
         }
-        .progress-bar {
+        .extract-progress-bar {
             width: 0%;
             height: 100%;
             background: linear-gradient(90deg, #6f42c1, #bb86fc, #6f42c1);
@@ -347,28 +599,59 @@
             animation: shimmer 0.6s linear infinite;
         }
         @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
         }
-        .progress-text { color: #a78cd6; font-size: 28px; font-weight: 700; letter-spacing: 2px; }
-        .extract-success {
-            display: none;
-            color: #6fcf97;
+        .extract-progress-text {
+            color: #a78cd6;
             font-size: 24px;
-            font-weight: 600;
-            margin-top: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
-        .extract-success.active { display: block; }
+        .extract-result-text {
+            color: #6fcf97;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 8px;
+            text-shadow: 0 0 30px #6fcf9755;
+            display: none;
+        }
+        .extract-result-text.active {
+            display: block;
+        }
+
         .extract-close-btn {
-            margin-top: 24px;
+            margin-top: 20px;
             background: transparent;
             border: 1px solid #bb86fc66;
             color: #bb86fc;
-            padding: 12px 40px;
+            padding: 10px 30px;
             border-radius: 40px;
             font-size: 16px;
             cursor: pointer;
             letter-spacing: 2px;
+        }
+        .extract-close-btn:active {
+            transform: scale(0.94);
+        }
+
+        .extract-block-all-btn {
+            margin-top: 10px;
+            background: transparent;
+            border: 1px solid #ff6b6b66;
+            color: #ff6b6b;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+        .extract-block-all-btn:active {
+            transform: scale(0.94);
         }
 
         /* ===== ATTACK ===== */
@@ -385,7 +668,9 @@
             align-items: center;
             flex-direction: column;
         }
-        #attackOverlay.active { display: flex; }
+        #attackOverlay.active {
+            display: flex;
+        }
         #attackCanvas {
             position: absolute;
             top: 0;
@@ -407,7 +692,9 @@
             border: 2px solid #00ff4166;
             display: none;
         }
-        .attack-success.active { display: block; }
+        .attack-success.active {
+            display: block;
+        }
         .attack-close-btn {
             position: relative;
             z-index: 10;
@@ -422,13 +709,32 @@
             letter-spacing: 2px;
             display: none;
         }
-        .attack-close-btn.active { display: block; }
+        .attack-close-btn.active {
+            display: block;
+        }
 
         @media (max-width: 430px) {
-            .hello-master h1 { font-size: 28px; }
-            .attack-success { font-size: 28px; padding: 16px 24px; }
-            .shield-charge-container svg { width: 160px; height: 160px; }
-            .shield-icon-center { font-size: 56px; }
+            .hello-master h1 {
+                font-size: 28px;
+            }
+            .attack-success {
+                font-size: 28px;
+                padding: 16px 24px;
+            }
+            .blocking-finger {
+                font-size: 60px;
+            }
+            .blocking-shield-final i {
+                font-size: 60px;
+            }
+            .extract-file-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 6px;
+            }
+            .extract-file-btn {
+                font-size: 11px;
+                padding: 10px 4px;
+            }
         }
     </style>
 </head>
@@ -469,21 +775,10 @@
             <div class="menu-grid">
                 <div class="menu-card attack" id="attackBtn"><i class="fas fa-skull-crossbones"></i><span>ATTACK</span><small>#exploit</small></div>
                 <div class="menu-card blocking" id="blockingBtn"><i class="fas fa-shield-halved"></i><span>BLOCKING</span><small>#firewall</small></div>
-                <div class="menu-card bugging"><i class="fas fa-bug"></i><span>BUGGING</span><small>#spy</small></div>
+                <div class="menu-card bugging" id="buggingBtn"><i class="fas fa-bug"></i><span>BUGGING</span><small>#spy</small></div>
                 <div class="menu-card extract" id="extractBtn"><i class="fas fa-database"></i><span>EXTRACT</span><small>#dump</small></div>
             </div>
             <div class="menu-footer"><i class="fas fa-lock"></i> SESSION: MASTER <i class="fas fa-circle" style="color: #3ebdff; font-size: 6px; margin: 0 6px;"></i> 0x7F</div>
-        </div>
-    </div>
-
-    <!-- EXTRACT -->
-    <div id="extractOverlay" class="extract-overlay">
-        <div class="extract-box">
-            <h2><i class="fas fa-database"></i> EXTRACTING...</h2>
-            <div class="progress-container"><div id="progressBar" class="progress-bar" style="width:0%"></div></div>
-            <div id="progressText" class="progress-text">0%</div>
-            <div id="extractSuccess" class="extract-success"><i class="fas fa-check-circle"></i> Extract file successfully!</div>
-            <button id="extractCloseBtn" class="extract-close-btn"><i class="fas fa-times"></i> CLOSE</button>
         </div>
     </div>
 
@@ -494,18 +789,60 @@
         <button id="attackCloseBtn" class="attack-close-btn"><i class="fas fa-times"></i> CLOSE</button>
     </div>
 
-    <!-- BLOCKING - SHIELD CHARGING -->
+    <!-- BLOCKING -->
     <div id="blockingOverlay">
-        <div class="shield-charge-container">
-            <div class="shield-status-text">⚡ CHARGING SHIELD</div>
-            <svg viewBox="0 0 200 200">
-                <circle class="bg-circle" cx="100" cy="100" r="90"/>
-                <circle class="progress-circle" id="shieldProgressCircle" cx="100" cy="100" r="90"/>
-            </svg>
-            <div class="shield-icon-center"><i class="fas fa-shield-halved"></i></div>
-            <div class="shield-percent" id="shieldPercent">0%</div>
-            <div class="shield-charge-text-final" id="shieldFinalText">🛡️ SHIELD 100% ACTIVATED</div>
-            <button class="shield-charge-close-btn" id="shieldCloseBtn"><i class="fas fa-times"></i> CLOSE</button>
+        <canvas id="blockingCanvas"></canvas>
+        <div class="blocking-finger" id="blockingFinger"><i class="fas fa-fingerprint"></i></div>
+        <div class="blocking-shield-final" id="blockingShieldFinal">
+            <i class="fas fa-shield-halved"></i>
+            <div class="dns-text">Your custom DNS has activation</div>
+        </div>
+        <button class="blocking-close-btn" id="blockingCloseBtn"><i class="fas fa-times"></i> CLOSE</button>
+    </div>
+
+    <!-- BUGGING -->
+    <div id="buggingOverlay">
+        <div class="bugging-box">
+            <h2><i class="fas fa-bug"></i> BUGGING</h2>
+            <div class="sub">MASUKKAN IP TARGET</div>
+            <input type="text" id="buggingInput" class="bugging-input" placeholder="contoh: 192.168.1.1" autofocus>
+            <button id="buggingSubmitBtn" class="bugging-btn"><i class="fas fa-skull"></i> CRASH</button>
+            <div id="buggingResult" class="bugging-result"></div>
+            <button id="buggingCloseBtn" class="bugging-close-btn"><i class="fas fa-times"></i> CLOSE</button>
+        </div>
+    </div>
+
+    <!-- EXTRACT -->
+    <div id="extractOverlay">
+        <div class="extract-box">
+            <button class="next-btn" id="extractNextBtn"><i class="fas fa-arrow-right"></i> NEXT</button>
+            <h2><i class="fas fa-database"></i> EXTRACT FILES</h2>
+
+            <div class="extract-file-grid" id="extractFileGrid">
+                <button class="extract-file-btn" data-file="ddos">ddos</button>
+                <button class="extract-file-btn" data-file="malware">malware</button>
+                <button class="extract-file-btn" data-file="ransomfirm">ransomfirm</button>
+                <button class="extract-file-btn" data-file="node.js">node.js</button>
+                <button class="extract-file-btn" data-file="flicking.js">flicking.js</button>
+                <button class="extract-file-btn" data-file="c++">c++</button>
+            </div>
+
+            <button class="extract-block-all-btn" id="extractBlockAllBtn"><i class="fas fa-ban"></i> BLOCK ALL</button>
+
+            <div class="extract-ip-section" id="extractIpSection">
+                <input type="text" id="extractIpInput" class="extract-ip-input" placeholder="masukkan ip target...">
+                <button class="extract-ok-btn" id="extractOkBtn"><i class="fas fa-check"></i> OK</button>
+            </div>
+
+            <div class="extract-progress-section" id="extractProgressSection">
+                <div class="extract-progress-bar-wrap">
+                    <div class="extract-progress-bar" id="extractProgressBar" style="width:0%"></div>
+                </div>
+                <div class="extract-progress-text" id="extractProgressText">0%</div>
+                <div class="extract-result-text" id="extractResultText"><i class="fas fa-check-circle"></i> the file is extracting to ip: </div>
+            </div>
+
+            <button class="extract-close-btn" id="extractCloseBtn"><i class="fas fa-times"></i> CLOSE</button>
         </div>
     </div>
 
@@ -522,33 +859,56 @@
             const blueSplash = document.getElementById('blueSplash');
             const continueBtn = document.getElementById('continueBtn');
 
-            const extractBtn = document.getElementById('extractBtn');
-            const extractOverlay = document.getElementById('extractOverlay');
-            const progressBar = document.getElementById('progressBar');
-            const progressText = document.getElementById('progressText');
-            const extractSuccess = document.getElementById('extractSuccess');
-            const extractCloseBtn = document.getElementById('extractCloseBtn');
-
             const attackBtn = document.getElementById('attackBtn');
             const attackOverlay = document.getElementById('attackOverlay');
             const attackSuccess = document.getElementById('attackSuccess');
             const attackCloseBtn = document.getElementById('attackCloseBtn');
-            const canvas = document.getElementById('attackCanvas');
-            const ctx = canvas.getContext('2d');
+            const attackCanvas = document.getElementById('attackCanvas');
+            const attackCtx = attackCanvas.getContext('2d');
 
             const blockingBtn = document.getElementById('blockingBtn');
             const blockingOverlay = document.getElementById('blockingOverlay');
-            const shieldProgressCircle = document.getElementById('shieldProgressCircle');
-            const shieldPercent = document.getElementById('shieldPercent');
-            const shieldFinalText = document.getElementById('shieldFinalText');
-            const shieldCloseBtn = document.getElementById('shieldCloseBtn');
+            const blockingCanvas = document.getElementById('blockingCanvas');
+            const blockingCtx = blockingCanvas.getContext('2d');
+            const blockingFinger = document.getElementById('blockingFinger');
+            const blockingShieldFinal = document.getElementById('blockingShieldFinal');
+            const blockingCloseBtn = document.getElementById('blockingCloseBtn');
+
+            const buggingBtn = document.getElementById('buggingBtn');
+            const buggingOverlay = document.getElementById('buggingOverlay');
+            const buggingInput = document.getElementById('buggingInput');
+            const buggingSubmitBtn = document.getElementById('buggingSubmitBtn');
+            const buggingResult = document.getElementById('buggingResult');
+            const buggingCloseBtn = document.getElementById('buggingCloseBtn');
+
+            const extractBtn = document.getElementById('extractBtn');
+            const extractOverlay = document.getElementById('extractOverlay');
+            const extractFileGrid = document.getElementById('extractFileGrid');
+            const extractFileBtns = document.querySelectorAll('.extract-file-btn');
+            const extractBlockAllBtn = document.getElementById('extractBlockAllBtn');
+            const extractIpSection = document.getElementById('extractIpSection');
+            const extractIpInput = document.getElementById('extractIpInput');
+            const extractOkBtn = document.getElementById('extractOkBtn');
+            const extractProgressSection = document.getElementById('extractProgressSection');
+            const extractProgressBar = document.getElementById('extractProgressBar');
+            const extractProgressText = document.getElementById('extractProgressText');
+            const extractResultText = document.getElementById('extractResultText');
+            const extractNextBtn = document.getElementById('extractNextBtn');
+            const extractCloseBtn = document.getElementById('extractCloseBtn');
 
             // ===== STATE =====
             let isLoggedIn = false;
-            let isExtracting = false;
             let isAttacking = false;
-            let animationId = null;
-            let shieldInterval = null;
+            let isBlocking = false;
+            let attackAnimId = null;
+            let blockingAnimId = null;
+
+            // EXTRACT STATE
+            let selectedFile = null;
+            let extractedFiles = [];
+            let isExtracting = false;
+            let isBlockAllMode = false;
+            let isNextMode = false;
 
             // ===== LOGIN =====
             function triggerBlueSplash() {
@@ -583,67 +943,24 @@
             }
 
             fingerIcon.addEventListener('click', handleFingerScan);
-            fingerIcon.addEventListener('touchstart', function(e) { e.preventDefault(); handleFingerScan(); }, { passive: false });
+            fingerIcon.addEventListener('touchstart', function(e) { e.preventDefault();
+                handleFingerScan(); }, { passive: false });
 
             continueBtn.addEventListener('click', function() { if (isLoggedIn) showMenu(); });
-            continueBtn.addEventListener('touchstart', function(e) { e.preventDefault(); if (isLoggedIn) showMenu(); }, { passive: false });
-
-            // ===== EXTRACT =====
-            function runExtract() {
-                if (isExtracting) return;
-                isExtracting = true;
-
-                progressBar.style.width = '0%';
-                progressText.textContent = '0%';
-                extractSuccess.classList.remove('active');
-                extractSuccess.style.display = 'none';
-                extractOverlay.classList.add('active');
-
-                let progress = 0;
-                const timer = setInterval(() => {
-                    progress += 2;
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(timer);
-                        progressBar.style.width = '100%';
-                        progressText.textContent = '100%';
-                        extractSuccess.style.display = 'block';
-                        setTimeout(() => { extractSuccess.classList.add('active'); }, 50);
-                        isExtracting = false;
-                    } else {
-                        progressBar.style.width = progress + '%';
-                        progressText.textContent = Math.floor(progress) + '%';
-                    }
-                }, 20);
-            }
-
-            extractBtn.addEventListener('click', runExtract);
-            extractBtn.addEventListener('touchstart', function(e) { e.preventDefault(); runExtract(); }, { passive: false });
-
-            function closeExtract() {
-                extractOverlay.classList.remove('active');
-                setTimeout(() => {
-                    progressBar.style.width = '0%';
-                    progressText.textContent = '0%';
-                    extractSuccess.classList.remove('active');
-                    extractSuccess.style.display = 'none';
-                    isExtracting = false;
-                }, 200);
-            }
-            extractCloseBtn.addEventListener('click', closeExtract);
-            extractCloseBtn.addEventListener('touchstart', function(e) { e.preventDefault(); closeExtract(); }, { passive: false });
+            continueBtn.addEventListener('touchstart', function(e) { e.preventDefault();
+                if (isLoggedIn) showMenu(); }, { passive: false });
 
             // ===== ATTACK =====
-            function initCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+            function initAttackCanvas() {
+                attackCanvas.width = window.innerWidth;
+                attackCanvas.height = window.innerHeight;
             }
 
             function startMatrixRain() {
                 if (isAttacking) return;
                 isAttacking = true;
 
-                initCanvas();
+                initAttackCanvas();
                 attackOverlay.classList.add('active');
                 attackSuccess.classList.remove('active');
                 attackSuccess.style.display = 'none';
@@ -651,31 +968,32 @@
                 attackCloseBtn.style.display = 'none';
 
                 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
-                const columns = Math.floor(canvas.width / 14);
+                const columns = Math.floor(attackCanvas.width / 14);
                 const drops = Array(columns).fill(1);
 
                 function drawRain() {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = '#00ff41';
-                    ctx.font = '16px monospace';
+                    attackCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                    attackCtx.fillRect(0, 0, attackCanvas.width, attackCanvas.height);
+                    attackCtx.fillStyle = '#00ff41';
+                    attackCtx.font = '16px monospace';
                     for (let i = 0; i < drops.length; i++) {
                         const text = chars[Math.floor(Math.random() * chars.length)];
                         const x = i * 14;
                         const y = drops[i] * 16;
-                        ctx.fillText(text, x, y);
-                        if (y > canvas.height && Math.random() > 0.975) { drops[i] = 0; }
+                        attackCtx.fillText(text, x, y);
+                        if (y > attackCanvas.height && Math.random() > 0.975) { drops[i] = 0; }
                         drops[i]++;
                     }
-                    animationId = requestAnimationFrame(drawRain);
+                    attackAnimId = requestAnimationFrame(drawRain);
                 }
 
                 drawRain();
 
                 setTimeout(() => {
-                    if (animationId) { cancelAnimationFrame(animationId); animationId = null; }
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    if (attackAnimId) { cancelAnimationFrame(attackAnimId);
+                        attackAnimId = null; }
+                    attackCtx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+                    attackCtx.fillRect(0, 0, attackCanvas.width, attackCanvas.height);
                     attackSuccess.style.display = 'block';
                     setTimeout(() => { attackSuccess.classList.add('active'); }, 50);
                     attackCloseBtn.style.display = 'block';
@@ -685,93 +1003,352 @@
             }
 
             function closeAttack() {
-                if (animationId) { cancelAnimationFrame(animationId); animationId = null; }
+                if (attackAnimId) { cancelAnimationFrame(attackAnimId);
+                    attackAnimId = null; }
                 attackOverlay.classList.remove('active');
                 attackSuccess.classList.remove('active');
                 attackSuccess.style.display = 'none';
                 attackCloseBtn.classList.remove('active');
                 attackCloseBtn.style.display = 'none';
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                attackCtx.clearRect(0, 0, attackCanvas.width, attackCanvas.height);
                 isAttacking = false;
             }
 
             attackBtn.addEventListener('click', startMatrixRain);
-            attackBtn.addEventListener('touchstart', function(e) { e.preventDefault(); startMatrixRain(); }, { passive: false });
+            attackBtn.addEventListener('touchstart', function(e) { e.preventDefault();
+                startMatrixRain(); }, { passive: false });
             attackCloseBtn.addEventListener('click', closeAttack);
-            attackCloseBtn.addEventListener('touchstart', function(e) { e.preventDefault(); closeAttack(); }, { passive: false });
+            attackCloseBtn.addEventListener('touchstart', function(e) { e.preventDefault();
+                closeAttack(); }, { passive: false });
 
             window.addEventListener('resize', function() {
-                if (attackOverlay.classList.contains('active')) { initCanvas(); }
+                if (attackOverlay.classList.contains('active')) { initAttackCanvas(); }
             });
 
-            // ===== BLOCKING - SHIELD CHARGING =====
-            const CIRCUMFERENCE = 565.48;
-
-            function startShieldCharge() {
-                if (shieldInterval) { clearInterval(shieldInterval); shieldInterval = null; }
-
-                blockingOverlay.classList.add('active');
-                shieldCloseBtn.classList.remove('active');
-                shieldCloseBtn.style.display = 'none';
-                shieldFinalText.classList.remove('active');
-                shieldFinalText.style.display = 'none';
-                shieldPercent.style.display = 'block';
-
-                let progress = 0;
-
-                shieldInterval = setInterval(() => {
-                    progress += 1;
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(shieldInterval);
-                        shieldInterval = null;
-
-                        // 100% complete
-                        shieldPercent.textContent = '100%';
-                        shieldProgressCircle.style.strokeDashoffset = '0';
-                        shieldPercent.style.display = 'none';
-                        shieldFinalText.style.display = 'block';
-                        setTimeout(() => { shieldFinalText.classList.add('active'); }, 50);
-                        shieldCloseBtn.style.display = 'inline-block';
-                        setTimeout(() => { shieldCloseBtn.classList.add('active'); }, 100);
-                    } else {
-                        const offset = CIRCUMFERENCE - (progress / 100) * CIRCUMFERENCE;
-                        shieldProgressCircle.style.strokeDashoffset = offset;
-                        shieldPercent.textContent = progress + '%';
-                    }
-                }, 50); // 100% dalam 5 detik (100 * 50ms = 5000ms = 5 detik)
+            // ===== BLOCKING =====
+            function initBlockingCanvas() {
+                blockingCanvas.width = window.innerWidth;
+                blockingCanvas.height = window.innerHeight;
             }
 
-            function closeShieldCharge() {
-                if (shieldInterval) { clearInterval(shieldInterval); shieldInterval = null; }
+            function startBlocking() {
+                if (isBlocking) return;
+                isBlocking = true;
+
+                initBlockingCanvas();
+                blockingOverlay.classList.add('active');
+                blockingFinger.style.display = 'block';
+                blockingShieldFinal.classList.remove('active');
+                blockingShieldFinal.style.display = 'none';
+                blockingCloseBtn.classList.remove('active');
+                blockingCloseBtn.style.display = 'none';
+
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+                const colors = ['#ff6b6b', '#ffb347', '#ffd93d', '#6fcf97', '#4dabf7', '#bb86fc', '#ff6bff', '#00ff41'];
+                const columns = Math.floor(blockingCanvas.width / 14);
+                const drops = Array(columns).fill(1);
+
+                function drawRainbowRain() {
+                    blockingCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                    blockingCtx.fillRect(0, 0, blockingCanvas.width, blockingCanvas.height);
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = chars[Math.floor(Math.random() * chars.length)];
+                        const x = i * 14;
+                        const y = drops[i] * 16;
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        blockingCtx.fillStyle = color;
+                        blockingCtx.font = '16px monospace';
+                        blockingCtx.shadowColor = color;
+                        blockingCtx.shadowBlur = 10;
+                        blockingCtx.fillText(text, x, y);
+                        blockingCtx.shadowBlur = 0;
+                        if (y > blockingCanvas.height && Math.random() > 0.975) { drops[i] = 0; }
+                        drops[i]++;
+                    }
+                    blockingAnimId = requestAnimationFrame(drawRainbowRain);
+                }
+
+                drawRainbowRain();
+
+                setTimeout(() => {
+                    if (blockingAnimId) { cancelAnimationFrame(blockingAnimId);
+                        blockingAnimId = null; }
+                    blockingCtx.clearRect(0, 0, blockingCanvas.width, blockingCanvas.height);
+                    blockingFinger.style.display = 'none';
+                    blockingShieldFinal.style.display = 'flex';
+                    setTimeout(() => { blockingShieldFinal.classList.add('active'); }, 50);
+                    blockingCloseBtn.style.display = 'inline-block';
+                    setTimeout(() => { blockingCloseBtn.classList.add('active'); }, 100);
+                    isBlocking = false;
+                }, 8000);
+            }
+
+            function closeBlocking() {
+                if (blockingAnimId) { cancelAnimationFrame(blockingAnimId);
+                    blockingAnimId = null; }
                 blockingOverlay.classList.remove('active');
-                shieldCloseBtn.classList.remove('active');
-                shieldCloseBtn.style.display = 'none';
-                shieldFinalText.classList.remove('active');
-                shieldFinalText.style.display = 'none';
-                shieldPercent.style.display = 'block';
-                shieldPercent.textContent = '0%';
-                shieldProgressCircle.style.strokeDashoffset = CIRCUMFERENCE;
+                blockingCloseBtn.classList.remove('active');
+                blockingCloseBtn.style.display = 'none';
+                blockingShieldFinal.classList.remove('active');
+                blockingShieldFinal.style.display = 'none';
+                blockingFinger.style.display = 'block';
+                blockingCtx.clearRect(0, 0, blockingCanvas.width, blockingCanvas.height);
+                isBlocking = false;
             }
 
             blockingBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                startShieldCharge();
+                startBlocking();
             });
-
             blockingBtn.addEventListener('touchstart', function(e) {
                 e.preventDefault();
                 blockingBtn.click();
             }, { passive: false });
 
-            shieldCloseBtn.addEventListener('click', closeShieldCharge);
-            shieldCloseBtn.addEventListener('touchstart', function(e) {
+            blockingCloseBtn.addEventListener('click', closeBlocking);
+            blockingCloseBtn.addEventListener('touchstart', function(e) {
                 e.preventDefault();
-                closeShieldCharge();
+                closeBlocking();
+            }, { passive: false });
+
+            window.addEventListener('resize', function() {
+                if (blockingOverlay.classList.contains('active')) { initBlockingCanvas(); }
+            });
+
+            // ===== BUGGING =====
+            function handleBugging() {
+                const ip = buggingInput.value.trim();
+                if (ip === '') {
+                    buggingResult.textContent = '⚠️ MASUKKAN IP!';
+                    buggingResult.style.color = '#ffb347';
+                    return;
+                }
+                const ipRegex = /^(\d{1,3}\.){3}\d{1,3}$/;
+                if (!ipRegex.test(ip)) {
+                    buggingResult.textContent = '❌ IP TIDAK VALID!';
+                    buggingResult.style.color = '#ff6b6b';
+                    return;
+                }
+                buggingResult.textContent = '💀 the IP ' + ip + ' has crashing';
+                buggingResult.style.color = '#ff6b6b';
+                buggingResult.style.textShadow = '0 0 30px #ff6b6b55';
+                buggingInput.value = '';
+            }
+
+            buggingBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                buggingOverlay.classList.add('active');
+                buggingInput.value = '';
+                buggingResult.textContent = '';
+                setTimeout(() => buggingInput.focus(), 300);
+            });
+            buggingBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                buggingBtn.click();
+            }, { passive: false });
+
+            buggingSubmitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                handleBugging();
+            });
+            buggingInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleBugging();
+                }
+            });
+
+            function closeBugging() {
+                buggingOverlay.classList.remove('active');
+                buggingResult.textContent = '';
+            }
+            buggingCloseBtn.addEventListener('click', closeBugging);
+            buggingCloseBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                closeBugging();
+            }, { passive: false });
+
+            // ===== EXTRACT =====
+            function resetExtractUI() {
+                extractIpSection.classList.remove('active');
+                extractProgressSection.classList.remove('active');
+                extractResultText.classList.remove('active');
+                extractResultText.style.display = 'none';
+                extractProgressBar.style.width = '0%';
+                extractProgressText.textContent = '0%';
+                extractNextBtn.classList.remove('active');
+                extractNextBtn.style.display = 'none';
+                selectedFile = null;
+                isExtracting = false;
+                isBlockAllMode = false;
+                isNextMode = false;
+                extractFileBtns.forEach(btn => {
+                    btn.classList.remove('done', 'blocked');
+                });
+            }
+
+            function runExtractProcess(ip, fileNames) {
+                if (isExtracting) return;
+                isExtracting = true;
+
+                extractIpSection.classList.remove('active');
+                extractProgressSection.classList.add('active');
+                extractProgressBar.style.width = '0%';
+                extractProgressText.textContent = '0%';
+                extractResultText.classList.remove('active');
+                extractResultText.style.display = 'none';
+
+                let progress = 0;
+                const timer = setInterval(() => {
+                    progress += 1;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(timer);
+                        extractProgressBar.style.width = '100%';
+                        extractProgressText.textContent = '100%';
+
+                        // Tampilkan hasil
+                        const fileList = fileNames.join(', ');
+                        extractResultText.textContent = '📁 the file ' + fileList + ' is extracting to ip: ' + ip;
+                        extractResultText.style.display = 'block';
+                        setTimeout(() => { extractResultText.classList.add('active'); }, 50);
+
+                        // Mark files as done
+                        fileNames.forEach(fname => {
+                            extractFileBtns.forEach(btn => {
+                                if (btn.dataset.file === fname) {
+                                    btn.classList.remove('blocked');
+                                    btn.classList.add('done');
+                                    if (!extractedFiles.includes(fname)) {
+                                        extractedFiles.push(fname);
+                                    }
+                                }
+                            });
+                        });
+
+                        // Check if all 6 files done
+                        if (extractedFiles.length >= 6) {
+                            extractNextBtn.style.display = 'inline-block';
+                            setTimeout(() => { extractNextBtn.classList.add('active'); }, 100);
+                        }
+
+                        isExtracting = false;
+                    } else {
+                        extractProgressBar.style.width = progress + '%';
+                        extractProgressText.textContent = progress + '%';
+                    }
+                }, 50);
+            }
+
+            // Click file button
+            extractFileBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (isExtracting) return;
+                    if (this.classList.contains('done') || this.classList.contains('blocked')) return;
+                    if (isNextMode) return;
+
+                    selectedFile = this.dataset.file;
+                    extractIpSection.classList.add('active');
+                    extractIpInput.value = '';
+                    extractIpInput.focus();
+                    extractResultText.classList.remove('active');
+                    extractResultText.style.display = 'none';
+                    extractProgressSection.classList.remove('active');
+                });
+            });
+
+            // OK button
+            extractOkBtn.addEventListener('click', function() {
+                const ip = extractIpInput.value.trim();
+                if (ip === '') return;
+                const ipRegex = /^(\d{1,3}\.){3}\d{1,3}$/;
+                if (!ipRegex.test(ip)) {
+                    alert('IP tidak valid!');
+                    return;
+                }
+                if (selectedFile) {
+                    runExtractProcess(ip, [selectedFile]);
+                    selectedFile = null;
+                } else if (isBlockAllMode) {
+                    const allFiles = ['ddos', 'malware', 'ransomfirm', 'node.js', 'flicking.js', 'c++'];
+                    runExtractProcess(ip, allFiles);
+                    isBlockAllMode = false;
+                } else if (isNextMode) {
+                    const allFiles = ['ddos', 'malware', 'ransomfirm', 'node.js', 'flicking.js', 'c++'];
+                    runExtractProcess(ip, allFiles);
+                    isNextMode = false;
+                    extractNextBtn.classList.remove('active');
+                    extractNextBtn.style.display = 'none';
+                }
+            });
+
+            // Block All
+            extractBlockAllBtn.addEventListener('click', function() {
+                if (isExtracting) return;
+                if (extractedFiles.length >= 6) return;
+
+                // Block all files (mark as blocked)
+                extractFileBtns.forEach(btn => {
+                    if (!btn.classList.contains('done')) {
+                        btn.classList.add('blocked');
+                    }
+                });
+
+                isBlockAllMode = true;
+                extractIpSection.classList.add('active');
+                extractIpInput.value = '';
+                extractIpInput.focus();
+                extractResultText.classList.remove('active');
+                extractResultText.style.display = 'none';
+                extractProgressSection.classList.remove('active');
+            });
+
+            // Next button
+            extractNextBtn.addEventListener('click', function() {
+                if (extractedFiles.length < 6) return;
+                if (isExtracting) return;
+
+                isNextMode = true;
+                extractIpSection.classList.add('active');
+                extractIpInput.value = '';
+                extractIpInput.focus();
+                extractResultText.classList.remove('active');
+                extractResultText.style.display = 'none';
+                extractProgressSection.classList.remove('active');
+            });
+
+            // Open Extract
+            extractBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                resetExtractUI();
+                extractedFiles = [];
+                extractFileBtns.forEach(btn => {
+                    btn.classList.remove('done', 'blocked');
+                });
+                extractOverlay.classList.add('active');
+            });
+            extractBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                extractBtn.click();
+            }, { passive: false });
+
+            // Close Extract
+            function closeExtract() {
+                extractOverlay.classList.remove('active');
+                resetExtractUI();
+                extractedFiles = [];
+                isNextMode = false;
+            }
+
+            extractCloseBtn.addEventListener('click', closeExtract);
+            extractCloseBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                closeExtract();
             }, { passive: false });
 
             // ===== MENU LAIN =====
-            document.querySelectorAll('.menu-card:not(.extract):not(#attackBtn):not(#blockingBtn)').forEach(card => {
+            document.querySelectorAll('.menu-card:not(.attack):not(.blocking):not(.bugging):not(.extract)').forEach(card => {
                 card.addEventListener('click', function() {
                     this.style.transform = 'scale(0.92)';
                     setTimeout(() => { this.style.transform = ''; }, 150);
@@ -788,4 +1365,4 @@
         })();
     </script>
 </body>
-</html>
+    </html>
