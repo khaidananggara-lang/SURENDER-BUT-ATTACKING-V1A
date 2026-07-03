@@ -251,7 +251,7 @@
             align-items: center;
         }
 
-        /* ===== BLOCKING ===== */
+        /* ===== BLOCKING - FINGER + RAINBOW MATRIX 8 DETIK + SHIELD ===== */
         #blockingOverlay {
             position: fixed;
             top: 0;
@@ -271,6 +271,7 @@
         #blockingOverlay.active {
             display: flex;
         }
+
         .blocking-finger {
             font-size: 80px;
             color: #6bcbff;
@@ -288,6 +289,7 @@
                 opacity: 1;
             }
         }
+
         .blocking-shield-final {
             display: none;
             flex-direction: column;
@@ -311,6 +313,7 @@
             letter-spacing: 2px;
             text-shadow: 0 0 30px #6fcf9755;
         }
+
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -321,6 +324,7 @@
                 transform: scale(1);
             }
         }
+
         .blocking-close-btn {
             margin-top: 20px;
             background: transparent;
@@ -340,6 +344,8 @@
         .blocking-close-btn:active {
             transform: scale(0.94);
         }
+
+        /* Canvas untuk hujan kode warna-warni */
         #blockingCanvas {
             position: absolute;
             top: 0;
@@ -789,7 +795,7 @@
         <button id="attackCloseBtn" class="attack-close-btn"><i class="fas fa-times"></i> CLOSE</button>
     </div>
 
-    <!-- BLOCKING -->
+    <!-- BLOCKING - FINGER + RAINBOW MATRIX 8 DETIK + SHIELD -->
     <div id="blockingOverlay">
         <canvas id="blockingCanvas"></canvas>
         <div class="blocking-finger" id="blockingFinger"><i class="fas fa-fingerprint"></i></div>
@@ -883,7 +889,6 @@
 
             const extractBtn = document.getElementById('extractBtn');
             const extractOverlay = document.getElementById('extractOverlay');
-            const extractFileGrid = document.getElementById('extractFileGrid');
             const extractFileBtns = document.querySelectorAll('.extract-file-btn');
             const extractBlockAllBtn = document.getElementById('extractBlockAllBtn');
             const extractIpSection = document.getElementById('extractIpSection');
@@ -1207,13 +1212,11 @@
                         extractProgressBar.style.width = '100%';
                         extractProgressText.textContent = '100%';
 
-                        // Tampilkan hasil
                         const fileList = fileNames.join(', ');
                         extractResultText.textContent = '📁 the file ' + fileList + ' is extracting to ip: ' + ip;
                         extractResultText.style.display = 'block';
                         setTimeout(() => { extractResultText.classList.add('active'); }, 50);
 
-                        // Mark files as done
                         fileNames.forEach(fname => {
                             extractFileBtns.forEach(btn => {
                                 if (btn.dataset.file === fname) {
@@ -1226,7 +1229,6 @@
                             });
                         });
 
-                        // Check if all 6 files done
                         if (extractedFiles.length >= 6) {
                             extractNextBtn.style.display = 'inline-block';
                             setTimeout(() => { extractNextBtn.classList.add('active'); }, 100);
@@ -1240,7 +1242,6 @@
                 }, 50);
             }
 
-            // Click file button
             extractFileBtns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -1258,7 +1259,6 @@
                 });
             });
 
-            // OK button
             extractOkBtn.addEventListener('click', function() {
                 const ip = extractIpInput.value.trim();
                 if (ip === '') return;
@@ -1283,12 +1283,10 @@
                 }
             });
 
-            // Block All
             extractBlockAllBtn.addEventListener('click', function() {
                 if (isExtracting) return;
                 if (extractedFiles.length >= 6) return;
 
-                // Block all files (mark as blocked)
                 extractFileBtns.forEach(btn => {
                     if (!btn.classList.contains('done')) {
                         btn.classList.add('blocked');
@@ -1304,7 +1302,6 @@
                 extractProgressSection.classList.remove('active');
             });
 
-            // Next button
             extractNextBtn.addEventListener('click', function() {
                 if (extractedFiles.length < 6) return;
                 if (isExtracting) return;
@@ -1318,7 +1315,6 @@
                 extractProgressSection.classList.remove('active');
             });
 
-            // Open Extract
             extractBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 resetExtractUI();
@@ -1333,7 +1329,6 @@
                 extractBtn.click();
             }, { passive: false });
 
-            // Close Extract
             function closeExtract() {
                 extractOverlay.classList.remove('active');
                 resetExtractUI();
@@ -1365,4 +1360,4 @@
         })();
     </script>
 </body>
-</html>
+    </html>
