@@ -184,15 +184,15 @@
         }
         .fingerprint-glow { position: relative; display: flex; justify-content: center; align-items: center; }
 
-        /* ===== BLOCKING ===== */
+        /* ===== BLOCKING - SHIELD CHARGING ===== */
         #blockingOverlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 10, 25, 0.95);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 10, 25, 0.93);
+            backdrop-filter: blur(14px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -200,79 +200,76 @@
             padding: 30px;
         }
         #blockingOverlay.active { display: flex; }
-        .blocking-box {
-            background: rgba(8, 20, 45, 0.95);
-            border: 1.5px solid #ffb347;
-            border-radius: 30px;
-            padding: 35px 25px;
-            max-width: 420px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 0 60px #ffb34722;
+
+        .shield-charge-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-        .blocking-box h2 { color: #ffb347; font-size: 24px; letter-spacing: 3px; text-shadow: 0 0 20px #ffb34755; }
-        .blocking-box .sub { color: #d48c3a; font-size: 14px; margin-bottom: 20px; }
-        .blocking-input {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(0, 20, 40, 0.8);
-            border: 1.5px solid #ffb34766;
-            border-radius: 16px;
-            color: #ffd7a0;
-            font-size: 20px;
-            text-align: center;
-            letter-spacing: 3px;
-            outline: none;
+
+        .shield-charge-container svg {
+            width: 200px;
+            height: 200px;
+            transform: rotate(-90deg);
         }
-        .blocking-input:focus { border-color: #ffb347; box-shadow: 0 0 30px #ffb34733; }
-        .blocking-btn {
-            margin-top: 16px;
-            background: transparent;
-            border: 1.5px solid #ffb347;
-            color: #ffb347;
-            padding: 12px 40px;
-            border-radius: 40px;
-            font-size: 16px;
-            cursor: pointer;
-            letter-spacing: 2px;
-            width: 100%;
+
+        .shield-charge-container .bg-circle {
+            fill: none;
+            stroke: #1a2a45;
+            stroke-width: 6;
         }
-        .blocking-btn:active { transform: scale(0.94); }
-        .blocking-status {
-            margin-top: 16px;
-            color: #d48c3a;
-            font-size: 15px;
-            min-height: 50px;
-            line-height: 1.6;
+
+        .shield-charge-container .progress-circle {
+            fill: none;
+            stroke: #ffb347;
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-dasharray: 565.48;
+            stroke-dashoffset: 565.48;
+            transition: stroke-dashoffset 0.1s linear;
+            filter: drop-shadow(0 0 15px #ffb34755);
         }
-        .shield-break-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 3000;
-        }
-        .shield-icon {
+
+        .shield-icon-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 70px;
             color: #ffb347;
             text-shadow: 0 0 40px #ffb347, 0 0 80px #ffb34755;
+        }
+
+        .shield-percent {
             position: absolute;
-            animation: shieldBreak 0.8s ease forwards;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffb347;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px #ffb34755;
         }
-        @keyframes shieldBreak {
-            0% { transform: scale(0.3) rotate(0deg); opacity: 1; }
-            30% { transform: scale(1.2) rotate(15deg); opacity: 1; }
-            100% { transform: scale(2) rotate(45deg); opacity: 0; }
+
+        .shield-status-text {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #d48c3a;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
-        .rush-final { color: #ff0000; font-size: 24px; font-weight: 700; text-shadow: 0 0 40px #ff0000; animation: finalPulse 0.3s ease infinite alternate; }
-        @keyframes finalPulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
-        }
-        .blocking-close-btn {
-            margin-top: 16px;
+
+        .shield-charge-close-btn {
+            margin-top: 80px;
             background: transparent;
             border: 1px solid #ffb34766;
             color: #ffb347;
@@ -282,10 +279,27 @@
             cursor: pointer;
             letter-spacing: 2px;
             display: none;
-            width: 100%;
         }
-        .blocking-close-btn.active { display: inline-block; }
-        .blocking-close-btn:active { transform: scale(0.94); }
+
+        .shield-charge-close-btn.active { display: inline-block; }
+        .shield-charge-close-btn:active { transform: scale(0.94); }
+
+        .shield-charge-text-final {
+            display: none;
+            color: #6fcf97;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-shadow: 0 0 40px #6fcf9755;
+            animation: successPulse 0.5s ease;
+        }
+        .shield-charge-text-final.active { display: block; }
+
+        @keyframes successPulse {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
         /* ===== EXTRACT ===== */
         .extract-overlay {
@@ -413,6 +427,8 @@
         @media (max-width: 430px) {
             .hello-master h1 { font-size: 28px; }
             .attack-success { font-size: 28px; padding: 16px 24px; }
+            .shield-charge-container svg { width: 160px; height: 160px; }
+            .shield-icon-center { font-size: 56px; }
         }
     </style>
 </head>
@@ -478,20 +494,20 @@
         <button id="attackCloseBtn" class="attack-close-btn"><i class="fas fa-times"></i> CLOSE</button>
     </div>
 
-    <!-- BLOCKING -->
+    <!-- BLOCKING - SHIELD CHARGING -->
     <div id="blockingOverlay">
-        <div class="blocking-box">
-            <h2><i class="fas fa-shield-halved"></i> DEFENDER</h2>
-            <div class="sub">MASUKKAN KODE AKSES</div>
-            <input type="text" id="blockingInput" class="blocking-input" placeholder="ketik kode..." autofocus>
-            <button id="blockingSubmitBtn" class="blocking-btn"><i class="fas fa-key"></i> VERIFY</button>
-            <div id="blockingStatus" class="blocking-status">⚡ siap</div>
-            <button id="blockingCloseBtn" class="blocking-close-btn"><i class="fas fa-times"></i> CLOSE</button>
+        <div class="shield-charge-container">
+            <div class="shield-status-text">⚡ CHARGING SHIELD</div>
+            <svg viewBox="0 0 200 200">
+                <circle class="bg-circle" cx="100" cy="100" r="90"/>
+                <circle class="progress-circle" id="shieldProgressCircle" cx="100" cy="100" r="90"/>
+            </svg>
+            <div class="shield-icon-center"><i class="fas fa-shield-halved"></i></div>
+            <div class="shield-percent" id="shieldPercent">0%</div>
+            <div class="shield-charge-text-final" id="shieldFinalText">🛡️ SHIELD 100% ACTIVATED</div>
+            <button class="shield-charge-close-btn" id="shieldCloseBtn"><i class="fas fa-times"></i> CLOSE</button>
         </div>
     </div>
-
-    <!-- SHIELD BREAK CONTAINER -->
-    <div id="shieldBreakContainer" class="shield-break-container"></div>
 
     <script>
         (function() {
@@ -522,20 +538,17 @@
 
             const blockingBtn = document.getElementById('blockingBtn');
             const blockingOverlay = document.getElementById('blockingOverlay');
-            const blockingInput = document.getElementById('blockingInput');
-            const blockingSubmitBtn = document.getElementById('blockingSubmitBtn');
-            const blockingStatus = document.getElementById('blockingStatus');
-            const blockingCloseBtn = document.getElementById('blockingCloseBtn');
-            const shieldContainer = document.getElementById('shieldBreakContainer');
+            const shieldProgressCircle = document.getElementById('shieldProgressCircle');
+            const shieldPercent = document.getElementById('shieldPercent');
+            const shieldFinalText = document.getElementById('shieldFinalText');
+            const shieldCloseBtn = document.getElementById('shieldCloseBtn');
 
             // ===== STATE =====
             let isLoggedIn = false;
             let isExtracting = false;
             let isAttacking = false;
-            let shieldCount = 0;
-            let rushInterval = null;
-            let isProcessing = false;
             let animationId = null;
+            let shieldInterval = null;
 
             // ===== LOGIN =====
             function triggerBlueSplash() {
@@ -691,131 +704,59 @@
                 if (attackOverlay.classList.contains('active')) { initCanvas(); }
             });
 
-            // ===== BLOCKING =====
-            function showShieldBreak() {
-                const shield = document.createElement('div');
-                shield.className = 'shield-icon';
-                shield.innerHTML = '<i class="fas fa-shield-halved"></i>';
-                shield.style.left = (Math.random() * 70 + 15) + '%';
-                shield.style.top = (Math.random() * 70 + 15) + '%';
-                shieldContainer.appendChild(shield);
-                setTimeout(() => { shield.remove(); }, 800);
-            }
+            // ===== BLOCKING - SHIELD CHARGING =====
+            const CIRCUMFERENCE = 565.48;
 
-            function updateRushStatus() {
-                if (shieldCount < 40) {
-                    blockingStatus.innerHTML = '⏳ RUSHING IS ON GOING, PLS CALM DOWN<br><span style="font-size:12px;color:#ffb34777;">shield break: ' + shieldCount + '/40</span>';
-                }
-            }
+            function startShieldCharge() {
+                if (shieldInterval) { clearInterval(shieldInterval); shieldInterval = null; }
 
-            function startRushMode() {
-                if (rushInterval) { clearInterval(rushInterval); rushInterval = null; }
-                shieldCount = 0;
-                shieldContainer.innerHTML = '';
-                isProcessing = true;
-                let speed = 200;
+                blockingOverlay.classList.add('active');
+                shieldCloseBtn.classList.remove('active');
+                shieldCloseBtn.style.display = 'none';
+                shieldFinalText.classList.remove('active');
+                shieldFinalText.style.display = 'none';
+                shieldPercent.style.display = 'block';
 
-                function doRush() {
-                    if (shieldCount >= 40) {
-                        clearInterval(rushInterval);
-                        rushInterval = null;
-                        blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
-                        blockingCloseBtn.classList.add('active');
-                        blockingCloseBtn.style.display = 'inline-block';
-                        isProcessing = false;
-                        return;
+                let progress = 0;
+
+                shieldInterval = setInterval(() => {
+                    progress += 1;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(shieldInterval);
+                        shieldInterval = null;
+
+                        // 100% complete
+                        shieldPercent.textContent = '100%';
+                        shieldProgressCircle.style.strokeDashoffset = '0';
+                        shieldPercent.style.display = 'none';
+                        shieldFinalText.style.display = 'block';
+                        setTimeout(() => { shieldFinalText.classList.add('active'); }, 50);
+                        shieldCloseBtn.style.display = 'inline-block';
+                        setTimeout(() => { shieldCloseBtn.classList.add('active'); }, 100);
+                    } else {
+                        const offset = CIRCUMFERENCE - (progress / 100) * CIRCUMFERENCE;
+                        shieldProgressCircle.style.strokeDashoffset = offset;
+                        shieldPercent.textContent = progress + '%';
                     }
-
-                    // 3 shield sekaligus
-                    for (let i = 0; i < 3; i++) {
-                        setTimeout(() => {
-                            if (shieldCount >= 40) return;
-                            showShieldBreak();
-                            shieldCount++;
-                            updateRushStatus();
-                            if (shieldCount >= 40) {
-                                clearInterval(rushInterval);
-                                rushInterval = null;
-                                blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
-                                blockingCloseBtn.classList.add('active');
-                                blockingCloseBtn.style.display = 'inline-block';
-                                isProcessing = false;
-                            }
-                        }, i * 100);
-                    }
-                    if (speed > 50) speed -= 5;
-                }
-
-                rushInterval = setInterval(doRush, speed);
+                }, 50); // 100% dalam 5 detik (100 * 50ms = 5000ms = 5 detik)
             }
 
-            function handleBlocking() {
-                if (isProcessing) return;
-                isProcessing = true;
-
-                const input = blockingInput.value.trim();
-                blockingInput.value = '';
-
-                const hasFunc = input.includes('.(function/dxl)');
-                const fCount = (input.match(/f/g) || []).length;
-
-                // SUCCESS
-                if (input === 'fff.bench') {
-                    blockingStatus.innerHTML = '✅ ACCESS GRANTED!';
-                    setTimeout(() => {
-                        blockingOverlay.classList.remove('active');
-                        blockingCloseBtn.classList.remove('active');
-                        blockingCloseBtn.style.display = 'none';
-                        shieldCount = 0;
-                        if (rushInterval) { clearInterval(rushInterval); rushInterval = null; }
-                        isProcessing = false;
-                        blockingStatus.innerHTML = '⚡ siap';
-                        shieldContainer.innerHTML = '';
-                    }, 1000);
-                    return;
-                }
-
-                // RUSH MODE
-                if (hasFunc && fCount !== 3) {
-                    blockingStatus.innerHTML = '⚡ RUSH MODE ACTIVATED!';
-                    startRushMode();
-                    return;
-                }
-
-                // SHIELD PECAH 1X
-                if (fCount !== 3) {
-                    showShieldBreak();
-                    shieldCount++;
-                    blockingStatus.innerHTML = '❌ KODE SALAH! Shield pecah! (' + shieldCount + '/40)';
-
-                    if (shieldCount >= 40) {
-                        blockingStatus.innerHTML = '<span class="rush-final">⚠️ YOU ARE RUSH THE SYSTEM</span>';
-                        blockingCloseBtn.classList.add('active');
-                        blockingCloseBtn.style.display = 'inline-block';
-                        isProcessing = false;
-                        return;
-                    }
-                    isProcessing = false;
-                    return;
-                }
-
-                blockingStatus.innerHTML = '❌ KODE TIDAK VALID';
-                isProcessing = false;
+            function closeShieldCharge() {
+                if (shieldInterval) { clearInterval(shieldInterval); shieldInterval = null; }
+                blockingOverlay.classList.remove('active');
+                shieldCloseBtn.classList.remove('active');
+                shieldCloseBtn.style.display = 'none';
+                shieldFinalText.classList.remove('active');
+                shieldFinalText.style.display = 'none';
+                shieldPercent.style.display = 'block';
+                shieldPercent.textContent = '0%';
+                shieldProgressCircle.style.strokeDashoffset = CIRCUMFERENCE;
             }
 
-            // EVENT BLOCKING
             blockingBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                blockingOverlay.classList.add('active');
-                blockingInput.value = '';
-                blockingStatus.innerHTML = '⚡ siap';
-                blockingCloseBtn.classList.remove('active');
-                blockingCloseBtn.style.display = 'none';
-                shieldCount = 0;
-                shieldContainer.innerHTML = '';
-                if (rushInterval) { clearInterval(rushInterval); rushInterval = null; }
-                isProcessing = false;
-                setTimeout(() => blockingInput.focus(), 300);
+                startShieldCharge();
             });
 
             blockingBtn.addEventListener('touchstart', function(e) {
@@ -823,33 +764,10 @@
                 blockingBtn.click();
             }, { passive: false });
 
-            blockingSubmitBtn.addEventListener('click', function(e) {
+            shieldCloseBtn.addEventListener('click', closeShieldCharge);
+            shieldCloseBtn.addEventListener('touchstart', function(e) {
                 e.preventDefault();
-                handleBlocking();
-            });
-
-            blockingInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleBlocking();
-                }
-            });
-
-            function closeBlocking() {
-                blockingOverlay.classList.remove('active');
-                blockingCloseBtn.classList.remove('active');
-                blockingCloseBtn.style.display = 'none';
-                shieldCount = 0;
-                if (rushInterval) { clearInterval(rushInterval); rushInterval = null; }
-                isProcessing = false;
-                blockingStatus.innerHTML = '⚡ siap';
-                shieldContainer.innerHTML = '';
-            }
-
-            blockingCloseBtn.addEventListener('click', closeBlocking);
-            blockingCloseBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                closeBlocking();
+                closeShieldCharge();
             }, { passive: false });
 
             // ===== MENU LAIN =====
